@@ -1,10 +1,17 @@
-const express = require('express');
+const express    = require('express');
+const mysql      = require('mysql');
+const dbconfig   = require('./config/database.js');
+const connection = mysql.createConnection(dbconfig);
+
 const app = express();
 
-const server = app.listen(80, () => {
-    console.log('Start Server : PORT : 80');
+// configuration =========================
+app.set('port', process.env.PORT || 80);
+
+app.get('/', (req, res) => {
+  res.send('Root');
 });
 
-app.get('/', async(req, res) =>{
-    res.send('Default')
-});
+app.listen(app.get('port'), () => {
+    console.log('Express server listening on port ' + app.get('port'));
+  });
