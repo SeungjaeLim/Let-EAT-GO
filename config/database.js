@@ -2,5 +2,5 @@ module.exports = {
     host     : 'localhost',
     user     : 'root',
     password : '1234',
-    database : 'my_db'
+    database : 'Let_EAT_Go'
   };
