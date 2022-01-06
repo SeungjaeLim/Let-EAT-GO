@@ -12,6 +12,19 @@ app.get('/', (req, res) => {
   res.send('Root');
 });
 
+app.get('/api/users/:id', (req, res) => {
+    let {id, email} = req.params;
+    if(id == 'all')
+    {
+        connection.query('SELECT * from Users', (error, results) => {
+            if (error) throw error;
+            console.log('User info is: ', results);
+            res.send(JSON.stringify(results));
+        });
+    }
+  });
+
+
 app.get('/api/users/:id/:email', (req, res) => {
     let {id, email} = req.params;
     if(id == 'all')
