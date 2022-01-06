@@ -1,0 +1,23 @@
+{
+  "name": "madcamp_week2_server_let-eat-go",
+  "version": "1.0.0",
+  "description": "server",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeungjaeLim/MADCAMP_Week2_Server_Let-EAT-Go.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SeungjaeLim/MADCAMP_Week2_Server_Let-EAT-Go/issues"
+  },
+  "homepage": "https://github.com/SeungjaeLim/MADCAMP_Week2_Server_Let-EAT-Go#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mysql": "^2.18.1"
+  }
+}
