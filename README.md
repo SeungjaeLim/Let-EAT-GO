@@ -1,2 +1,2 @@
-# MADCAMP_Week2_Server_Let-EAT-Go
+# Let EAT Go Server
 MADCAMP Week2 Server and DB Project
