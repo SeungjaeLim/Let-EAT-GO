@@ -58,6 +58,30 @@ app.get('/api/users/:id/:email', (req, res) => {
     }
   });
 
+  app.get('/api/partys/create/:userid/:category/:name/:maxjoin/:time', (req, res) => {
+    let {userid, category, name, maxjoin, time} = req.params;
+    // param을 바탕으로 id를 create하고, host에 userid를 넣은 후 JSON으로 row 전달
+  });
+
+  app.get('/api/partys/participate/:userid/:jobid', (req, res) => {
+    let {userid, jobid} = req.params;
+    // jobid에 userid 등록
+  });
+
+  app.get('/api/partys/delete/:userid/:jobid', (req, res) => {
+    let {userid, jobid} = req.params;
+    // userid가 host인 경우 jobid 삭제
+  });
+
+  app.get('/api/partys/show/:userid/:jobid', (req, res) => {
+    let {userid, jobid} = req.params;
+    // jobid의 정보 보기
+  });
+
+
+
+
 app.listen(app.get('port'), () => {
     console.log('Express server listening on port ' + app.get('port'));
   });
+  
