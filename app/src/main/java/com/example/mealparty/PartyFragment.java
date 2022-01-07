@@ -22,9 +22,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mealparty.placeholder.PlaceholderContent;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,6 +72,7 @@ public class PartyFragment extends Fragment {
             requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         }
         Show_All_Party();
+        Create_Party("12345", "Eoeun", "Udi Room", 4, "20221122150000");
     }
 
     @Override
@@ -94,17 +97,42 @@ public class PartyFragment extends Fragment {
     {
         String url = "http://172.10.5.55:80";
         url = url + "/api/partys/show/all";
+
+        Map<String, ArrayList> partyMap = new HashMap<>();
+        ArrayList idList = new ArrayList();
+        ArrayList CategoryList = new ArrayList();
+        ArrayList NameList = new ArrayList();
+        ArrayList JoinedList = new ArrayList();
+        ArrayList MAXjoinList = new ArrayList();
+        ArrayList timeList = new ArrayList();
+        ArrayList hostList = new ArrayList();
+
         System.out.println(url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    System.out.println("eeeeeeeeeeeeeeeeeeeeeee");
-                    System.out.println(jsonObject.toString());
-
+                    System.out.println(response);
+                    JSONArray jsonArray = new JSONArray(response);
+                    System.out.println(jsonArray.getJSONObject(0));
+                    for(int i = 0; i<jsonArray.length(); i++)
+                    {
+                        idList.add(jsonArray.getJSONObject(i).getString("id"));
+                        CategoryList.add(jsonArray.getJSONObject(i).getString("Category"));
+                        NameList.add(jsonArray.getJSONObject(i).getString("Name"));
+                        JoinedList.add(jsonArray.getJSONObject(i).getInt("Joined"));
+                        MAXjoinList.add(jsonArray.getJSONObject(i).getInt("MAXjoin"));
+                        timeList.add(jsonArray.getJSONObject(i).getString("time"));
+                        hostList.add(jsonArray.getJSONObject(i).getString("host"));
+                    }
+                    partyMap.put("id",idList);
+                    partyMap.put("Category",CategoryList);
+                    partyMap.put("Name",NameList);
+                    partyMap.put("Join",JoinedList);
+                    partyMap.put("MAXjoin",MAXjoinList);
+                    partyMap.put("time",timeList);
+                    partyMap.put("host",hostList);
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -128,6 +156,47 @@ public class PartyFragment extends Fragment {
         request.setShouldCache(false);
         requestQueue.add(request);
         System.out.println("Send Request");
+    }
+
+    private void Create_Party(String userid, String category, String name, int maxjoin, String time)
+    {
+        String url = "http://172.10.5.55:80";
+        url = url + "/api/partys/create/"+userid+"/"+category+"/"+name+"/"+maxjoin+"/"+time;
+        //final String[] jobid = {};
+
+        System.out.println(url);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    //jobid[0] = jsonObject.getString("id");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String,String>();
+                return params;
+            }
+        };
+        request.setTag(TAG);
+        request.setShouldCache(false);
+        requestQueue.add(request);
+        System.out.println("Send Request Create");
+
+        //return jobid[0];
     }
 
 }
