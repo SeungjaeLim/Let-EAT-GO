@@ -89,19 +89,31 @@ app.get('/api/users/:id/:email', (req, res) => {
         console.log('exist');
       }
       connection.query('select * from Users where id='+id,(error, results) => {
+        if (error) throw error;
         res.send(JSON.stringify(results));
       });
     });
   }
 });
 
-app.get('/api/users/host/:userid', (req, res) => {
-  let {userid, jobid} = req.params;
+app.get('/api/mypage/host/:userid', (req, res) => {
+  let {userid} = req.params;
+  let sql_user_host = 'select id from Partys where host=' + userid;
+  connection.query(sql_user_host, (error, results) =>{
+    if (error) throw error;
+    res.send(JSON.stringify(results));
+  });
   // userid가 host인 jobid 리턴
 });
 
-app.get('/api/users/participate/:userid', (req, res) => {
-  let {userid, jobid} = req.params;
+app.get('/api/mypage/participate/:userid', (req, res) => {
+  let {userid} = req.params;
+  let sql_user_participate = 'select id from Partys where Participant1=? OR Participant2=? OR Participant3=?';
+  let params_user_participate = [userid, userid, userid];
+  connection.query(sql_user_participate, params_user_participate, (error, results) =>{
+    if (error) throw error;
+    res.send(JSON.stringify(results));
+  });
   // userid가 participate인 jobid 리턴
 });
 
