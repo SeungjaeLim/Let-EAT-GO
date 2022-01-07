@@ -6,7 +6,7 @@
    - HTTP Protocol
    
     /api/users/all
-   - respond - 모든 User의 id와 email을 json으로 응답
+   - respond - 모든 `User`의 `id`와 `email`을 `json`으로 응답
    
     [{"id":"ID 1","email":"Email 1"},{"id":"ID 2","email":"Email 2"}]
    
@@ -23,7 +23,7 @@
    - HTTP Protocol
    
     /api/users/:id/:email
-   - respond - 기존에 계정이 없을 경우 등록 후 기존 계정 여부와 무관하게 id와 email을 json으로 응답
+   - respond - 기존에 계정이 없을 경우 등록 후 기존 계정 여부와 무관하게 `id`와 `email`을 `json`으로 응답
    
     [{"id":":id","email":":email"}]
    
@@ -43,7 +43,7 @@
    - HTTP Protocol
    
     /api/mypage/host/:userid
-   - respond - userid가 호스팅 하고 있는 파티들을 json으로 응답
+   - respond - `userid`가 호스팅 하고 있는 파티들을 `json`으로 응답
    
     [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3},{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3}]
     
@@ -59,7 +59,7 @@
    - HTTP Protocol
    
     /api/mypage/participate/:userid
-   - respond - userid가 참가 하고 있는 파티 json으로 응답
+   - respond - `userid`가 참가 하고 있는 파티 `json`으로 응답
    
     [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3},{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3}]
     
@@ -75,7 +75,7 @@
 
   ### Format of Instance
   
-   - `userid` : `카카오톡SDK` 유저 ID
+   - `userid` : `카카오톡SDK` 유저 `ID`
     
    - `category` : `KAIST`, `Eoeun`, `Gung` **Must Be English**
 
@@ -90,7 +90,7 @@
    
     /api/partys/create/:userid/:category/:name/:maxjoin/:time
     
-   - respond - 생성된 파티의 정보를 json으로 응답
+   - respond - 생성된 파티의 정보를 `json`으로 응답
    
     [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":1,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":null,"Participant2":null,"Participant3":null}]
     
@@ -107,7 +107,7 @@
    
     /api/partys/participate/:userid/:jobid
     
-   - respond - 참여한 파티의 정보를 json으로 응답
+   - respond - 참여한 파티의 정보를 `json`으로 응답
    
     [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3}]
     
@@ -132,15 +132,15 @@
    
     /api/partys/delete/:userid/:jobid
     
-   - respond - 삭제 성공 여부를 String으로 응답
+   - respond - 삭제 성공 여부를 `String`으로 응답
    
     Delete Successed
     
-   - respond - userid가 호스트가 아닌 경우
+   - respond - `userid`가 호스트가 아닌 경우
    
     Delete Failed
     
-   - respond - jobid가 잘못된 경우
+   - respond - `jobid`가 잘못된 경우
    
     Delete Failed
     
@@ -157,7 +157,7 @@
    
     /api/partys/show/all
     
-   - respond - 모든 파티의 정보를 json으로 응답
+   - respond - 모든 파티의 정보를 `json`으로 응답
    
     [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3},{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3}]
     
@@ -174,7 +174,7 @@
    
     /api/partys/show/:jobid
     
-   - respond - 해당 파티의 정보를 json으로 응답
+   - respond - 해당 파티의 정보를 `json`으로 응답
    
     [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3}]
     
@@ -191,7 +191,7 @@
    
     /api/partys/category/:category
     
-   - respond - 해당 카테고리에  파티의 정보를 json으로 응답
+   - respond - 해당 카테고리에 파티의 정보를 `json`으로 응답
    
     [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3}]
     
