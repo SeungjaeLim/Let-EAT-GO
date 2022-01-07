@@ -95,16 +95,26 @@ app.get('/api/users/:id/:email', (req, res) => {
   }
 });
 
+app.get('/api/users/host/:userid', (req, res) => {
+  let {userid, jobid} = req.params;
+  // userid가 host인 jobid 리턴
+});
+
+app.get('/api/users/participate/:userid', (req, res) => {
+  let {userid, jobid} = req.params;
+  // userid가 participate인 jobid 리턴
+});
+
 app.get('/api/partys/create/:userid/:category/:name/:maxjoin/:time', (req, res) => {
   // param을 바탕으로 id를 create하고, host에 userid를 넣은 후 JSON으로 row 전달
   let {userid, category, name, maxjoin, time} = req.params;
   let jobid = create_jobID();
   //let datetime = time_formating(time);
-  var sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host) VALUES(?,?,?,?,?,?,?)';
-  var params_party_create = [jobid, category, name, 1, parseInt(maxjoin), time, userid];
+  let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host) VALUES(?,?,?,?,?,?,?)';
+  let params_party_create = [jobid, category, name, 1, parseInt(maxjoin), time, userid];
   connection.query(sql_party_create, params_party_create, (err, result, fields) => {
     if (err) throw err;
-    var sql_party_info = 'select * from Partys where id='+jobid;
+    let sql_party_info = 'select * from Partys where id='+jobid;
     connection.query(sql_party_info, (error, results, fields) => {
       if (error) throw error;
       console.log('Create :', results);
@@ -114,12 +124,59 @@ app.get('/api/partys/create/:userid/:category/:name/:maxjoin/:time', (req, res) 
 });
 
 app.get('/api/partys/participate/:userid/:jobid', (req, res) => {
-  let {userid, jobid} = req.params;
   // jobid에 userid 등록
+  let {userid, jobid} = req.params;
+  let sql_party_show = 'select Joined,MAXjoin,host,Participant1,Participant2,Participant3 from Partys where id='+jobid;
+  connection.query(sql_party_show, (error, results, fields) => {
+    if(error) throw error;
+    if(results[0].host == userid || results[0].Participant1 == userid || results[0].Participant2 == userid || results[0].Participant3 == userid)
+    {
+      console.log('already joined');
+      res.send('already joined');
+    }
+    else if(results[0].Joined == results[0].MAXjoin)
+    {
+      console.log('err-FULL PARTY');
+      res.send('err-FULL PARTY');
+    }
+    else
+    {
+      let sql_party_participate = 'UPDATE Partys SET Joined=?, Participant'+results[0].Joined+'=? WHERE id=?';
+      let params_party_participate = [results[0].Joined+1, userid, jobid];
+      connection.query(sql_party_participate, params_party_participate, (error, presults, fields) =>
+      {
+        if(error) throw error;
+        let sql_party_info = 'select * from Partys where id='+jobid;
+        connection.query(sql_party_info, (error, iresults, fields) => {
+          if (error) throw error;
+          console.log('Participate :', iresults);
+          res.send(JSON.stringify(iresults));
+        });
+      }); 
+    }
+  })
+  
 });
 
 app.get('/api/partys/delete/:userid/:jobid', (req, res) => {
   let {userid, jobid} = req.params;
+  let sql_party_delete = 'DELETE FROM Partys where id=? AND host=?';
+  let params_party_delete = [jobid, userid];
+  connection.query(sql_party_delete, params_party_delete, (err, result) =>
+  {
+    if (err) throw err;
+    let del_cnt = result.affectedRows;
+    if(del_cnt == 0)
+    {
+      console.log("Delete Failed");
+      res.send("Delete Failed");  
+    }
+    else
+    {
+      console.log("Delete Successed");
+      res.send("Delete Successed");  
+    }
+  })
   // userid가 host인 경우 jobid 삭제
 });
 
@@ -128,7 +185,7 @@ app.get('/api/partys/show/:jobid', (req, res) => {
   // jobid의 정보 보기
   if(jobid == 'all')
   {
-    var sql_party_all = 'SELECT * from Partys';
+    let sql_party_all = 'SELECT * from Partys';
     connection.query(sql_party_all, (error, results) => {
       if (error) throw error;
       console.log('All Partys info is: ', results);
@@ -137,7 +194,7 @@ app.get('/api/partys/show/:jobid', (req, res) => {
   }
   else
   {
-    var sql_party_info = 'select * from Partys where id='+jobid;
+    let sql_party_info = 'select * from Partys where id='+jobid;
     connection.query(sql_party_info, (error, results, fields) => {
       if (error) throw error;
       console.log('Create :', results);
