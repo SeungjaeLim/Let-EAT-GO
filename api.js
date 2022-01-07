@@ -98,7 +98,7 @@ app.get('/api/users/:id/:email', (req, res) => {
 
 app.get('/api/mypage/host/:userid', (req, res) => {
   let {userid} = req.params;
-  let sql_user_host = 'select id from Partys where host=' + userid;
+  let sql_user_host = 'select * from Partys where host=' + userid;
   connection.query(sql_user_host, (error, results) =>{
     if (error) throw error;
     res.send(JSON.stringify(results));
@@ -108,7 +108,7 @@ app.get('/api/mypage/host/:userid', (req, res) => {
 
 app.get('/api/mypage/participate/:userid', (req, res) => {
   let {userid} = req.params;
-  let sql_user_participate = 'select id from Partys where Participant1=? OR Participant2=? OR Participant3=?';
+  let sql_user_participate = 'select * from Partys where Participant1=? OR Participant2=? OR Participant3=?';
   let params_user_participate = [userid, userid, userid];
   connection.query(sql_user_participate, params_user_participate, (error, results) =>{
     if (error) throw error;
@@ -167,7 +167,6 @@ app.get('/api/partys/participate/:userid/:jobid', (req, res) => {
       }); 
     }
   })
-  
 });
 
 app.get('/api/partys/delete/:userid/:jobid', (req, res) => {
@@ -213,6 +212,16 @@ app.get('/api/partys/show/:jobid', (req, res) => {
       res.send(JSON.stringify(results));
     });
   }
+});
+
+app.get('/api/partys/category/:category', (req, res) => {
+  let {category} = req.params;
+  let sql_party_category = 'select * from Partys where Category=?';
+  let params_party_category = [category];
+  connection.query(sql_party_category, params_party_category, (error, results) =>{
+    if (error) throw error;
+    res.send(JSON.stringify(results));
+  });
 });
 
 app.listen(app.get('port'), () => {
