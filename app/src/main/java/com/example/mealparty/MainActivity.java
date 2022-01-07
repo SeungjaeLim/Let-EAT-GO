@@ -84,42 +84,6 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                item.setChecked(true);
-                drawer.closeDrawers();
-
-                int id = item.getItemId();
-                switch(id){
-                    case R.id.nav_home:
-                        if (getSupportFragmentManager().findFragmentByTag("Home") != null) {
-                            getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("Home")).commit();
-                        } else {
-                            getSupportFragmentManager().beginTransaction().add(R.id.nav_host_fragment_content_main, new HomeFragment(), "Home").commit();
-                        }
-                        //보이는거 처리
-                        if(getSupportFragmentManager().findFragmentByTag("Gallery") !=null){
-                            getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Gallery")).commit();
-                        }
-                        return true;
-                    case R.id.nav_gallery:
-                        if (getSupportFragmentManager().findFragmentByTag("Gallery") != null) {
-                            getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("Gallery")).commit();
-                        } else {
-                            getSupportFragmentManager().beginTransaction().add(R.id.nav_host_fragment_content_main, new GalleryFragment(), "Gallery").commit();
-                        }
-                        //보이는거 처리
-                        if(getSupportFragmentManager().findFragmentByTag("Home") !=null){
-                            getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Home")).commit();
-                        }
-                        return true;
-                }
-                return false;
-            }
-        });
-
-
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(MenuCrawling.newInstance("01","01"));
@@ -140,16 +104,6 @@ public class MainActivity extends AppCompatActivity{
             }
         }).attach();
 
-        ///login
-
-        Button LoginButton = findViewById(R.id.button_login);
-
-        LoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                //Intent login = new Intent(Intent.)
-            }
-        });
 
 
 
