@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/SeungjaeLim/MADCAMP_Week2_Server_Let-EAT-Go#readme",
   "dependencies": {
+    "date-utils": "^1.2.21",
     "express": "^4.17.2",
     "mysql": "^2.18.1"
   }

@@ -4,12 +4,31 @@ const dbconfig   = require('./config/database.js');
 const connection = mysql.createConnection(dbconfig);
 
 const app = express();
+// function ==============================
+function create_jobID()
+{
+  let datekey = new Date();
+  let jobkey = '';
+  var rand_key = Math.floor(Math.random()*10);
+  let month = datekey.getMonth() % 10;
+  let day = datekey.getDate() + 10;
+  let hours = datekey.getHours() + 10;
+  let minutes = datekey.getMinutes() + 10;
+  let seconds = datekey.getSeconds() + 10;
+  jobkey = jobkey + rand_key + month + day + hours + minutes + seconds;
+  console.log(jobkey);
+  return jobkey;
+}
 
 // configuration =========================
 app.set('port', process.env.PORT || 80);
 
 app.get('/', (req, res) => {
   res.send('Root');
+});
+
+app.get('/debug/jobid', (req, res) => {
+  res.send(create_jobID());
 });
 
 app.get('/api/users/:id', (req, res) => {
@@ -73,8 +92,8 @@ app.get('/api/users/:id/:email', (req, res) => {
     // userid가 host인 경우 jobid 삭제
   });
 
-  app.get('/api/partys/show/:userid/:jobid', (req, res) => {
-    let {userid, jobid} = req.params;
+  app.get('/api/partys/show/:jobid', (req, res) => {
+    let {jobid} = req.params;
     // jobid의 정보 보기
   });
 
