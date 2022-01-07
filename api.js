@@ -135,6 +135,15 @@ app.get('/api/partys/show/:jobid', (req, res) => {
       res.send(JSON.stringify(results));
     });
   }
+  else
+  {
+    var sql_party_info = 'select * from Partys where id='+jobid;
+    connection.query(sql_party_info, (error, results, fields) => {
+      if (error) throw error;
+      console.log('Create :', results);
+      res.send(JSON.stringify(results));
+    });
+  }
 });
 
 app.listen(app.get('port'), () => {
