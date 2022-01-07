@@ -40,6 +40,8 @@ public class PartyFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     public static RequestQueue requestQueue;
+    ArrayList jidList = new ArrayList();
+    int jidcnt = 0;
     Context ct;
     private static final String TAG = "MAIN";
 
@@ -72,7 +74,8 @@ public class PartyFragment extends Fragment {
             requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         }
         Show_All_Party();
-        Create_Party("12345", "Eoeun", "Udi Room", 4, "20221122150000");
+        Create_Party("12345", "Eoeun", "꼬꾸마시", 4, "20221122150000");
+        Delete_Party("12345", "9017261125");
     }
 
     @Override
@@ -162,9 +165,8 @@ public class PartyFragment extends Fragment {
     {
         String url = "http://172.10.5.55:80";
         url = url + "/api/partys/create/"+userid+"/"+category+"/"+name+"/"+maxjoin+"/"+time;
-        //final String[] jobid = {};
-
         System.out.println(url);
+
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
             @SuppressLint("SetTextI18n")
@@ -173,7 +175,8 @@ public class PartyFragment extends Fragment {
                 System.out.println(response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    //jobid[0] = jsonObject.getString("id");
+                    jidList.add(jsonObject.getString("id"));
+                    jidcnt++;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -195,8 +198,38 @@ public class PartyFragment extends Fragment {
         request.setShouldCache(false);
         requestQueue.add(request);
         System.out.println("Send Request Create");
+    }
 
-        //return jobid[0];
+    private void Delete_Party(String userid, String jobid)
+    {
+        String url = "http://172.10.5.55:80";
+        url = url + "/api/partys/delete/"+userid+"/"+jobid;
+        System.out.println(url);
+
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String,String>();
+                return params;
+            }
+        };
+        request.setTag(TAG);
+        request.setShouldCache(false);
+        requestQueue.add(request);
+        System.out.println("Send Request Delete");
     }
 
 }
