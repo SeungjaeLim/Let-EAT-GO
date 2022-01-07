@@ -43,9 +43,9 @@
    - HTTP Protocol
    
     /api/mypage/host/:userid
-   - respond - userid가 호스팅 하고 있는 파티id를 json으로 응답
+   - respond - userid가 호스팅 하고 있는 파티들을 json으로 응답
    
-    [{"id":"PARTY ID 1"},{"id":"PARTY ID 2"}]
+    [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3},{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3}]
     
    - request example
    
@@ -53,15 +53,15 @@
    
    - respond example
    
-    [{"id":"7017181466"},{"id":"9017181057"}]
+    [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":4,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"11111","Participant1":"22222","Participant2":"33333","Participant3":"44444"},{"id":"7017181466","Category":"Eoeun","Name":"투다리","Joined":1,"MAXjoin":4,"time":"2022-01-07T22:00:00.000Z","host":"11111","Participant1":null,"Participant2":null,"Participant3":null}]
     
    ### 참가 하고 있는 파티 조회하기
    - HTTP Protocol
    
     /api/mypage/participate/:userid
-   - respond - userid가 참가 하고 있는 파티id를 json으로 응답
+   - respond - userid가 참가 하고 있는 파티 json으로 응답
    
-    [{"id":"PARTY ID 1"},{"id":"PARTY ID 2"}]
+    [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3},{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3}]
     
    - request example
    
@@ -69,7 +69,7 @@
    
    - respond example
    
-    [{"id":"6017181238"},{"id":"7017181033"}]
+    [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":4,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"22222","Participant1":"11111","Participant2":"33333","Participant3":"44444"},{"id":"7017181466","Category":"Eoeun","Name":"투다리","Joined":1,"MAXjoin":4,"time":"2022-01-07T22:00:00.000Z","host":"33333","Participant1":"11111","Participant2":null,"Participant3":null}]
   
 ##  api - partys
 
@@ -88,7 +88,7 @@
    
    - respond example
    
-    [{"id":"1017182317","Category":"어은동","Name":"밀과보리","Joined":1,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"11111","Participant1":null,"Participant2":null,"Participant3":null}]
+    [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":1,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"11111","Participant1":null,"Participant2":null,"Participant3":null}]
     
   ### 파티 참여하기
    - HTTP Protocol
@@ -113,7 +113,7 @@
    
    - respond example
    
-    [{"id":"1017182317","Category":"어은동","Name":"밀과보리","Joined":2,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"11111","Participant1":"22222","Participant2":null,"Participant3":null}]
+    [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":2,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"11111","Participant1":"22222","Participant2":null,"Participant3":null}]
     
   ### 파티 삭제하기
    - HTTP Protocol
@@ -155,7 +155,7 @@
    
    - respond example
    
-    [{"id":"1017182317","Category":"어은동","Name":"밀과보리","Joined":4,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"11111","Participant1":"22222","Participant2":"33333","Participant3":"44444"},{"id":"6017181238","Category":"궁동","Name":"청년다방","Joined":2,"MAXjoin":4,"time":"2022-01-07T17:00:00.000Z","host":"22222","Participant1":"11111","Participant2":null,"Participant3":null},{"id":"7017181033","Category":"어은동","Name":"두발네발","Joined":2,"MAXjoin":4,"time":"2022-01-07T23:00:00.000Z","host":"22222","Participant1":"11111","Participant2":null,"Participant3":null},{"id":"7017181466","Category":"어은동","Name":"투다리","Joined":1,"MAXjoin":4,"time":"2022-01-07T22:00:00.000Z","host":"11111","Participant1":null,"Participant2":null,"Participant3":null}]
+    [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":4,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"11111","Participant1":"22222","Participant2":"33333","Participant3":"44444"},{"id":"6017181238","Category":"Gung","Name":"청년다방","Joined":2,"MAXjoin":4,"time":"2022-01-07T17:00:00.000Z","host":"22222","Participant1":"11111","Participant2":null,"Participant3":null},{"id":"7017181033","Category":"Eoeun","Name":"두발네발","Joined":2,"MAXjoin":4,"time":"2022-01-07T23:00:00.000Z","host":"22222","Participant1":"11111","Participant2":null,"Participant3":null},{"id":"7017181466","Category":"Eoeun","Name":"투다리","Joined":1,"MAXjoin":4,"time":"2022-01-07T22:00:00.000Z","host":"11111","Participant1":null,"Participant2":null,"Participant3":null}]
     
    ### 특정 파티 조회
    - HTTP Protocol
@@ -172,6 +172,24 @@
    
    - respond example
    
-    [{"id":"1017182317","Category":"어은동","Name":"밀과보리","Joined":4,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"11111","Participant1":"22222","Participant2":"33333","Participant3":"44444"}]
+    [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":4,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"11111","Participant1":"22222","Participant2":"33333","Participant3":"44444"}]
+    
+   ### 카테고리 조희
+   - HTTP Protocol
+   
+    /api/partys/category/:category
+    
+   - respond - 해당 카테고리에  파티의 정보를 json으로 응답
+   
+    [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3}]
+    
+   - request example
+   
+    /api/partys/category/Eoeun
+   
+   - respond example
+   
+    [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":2,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"11111","Participant1":"22222","Participant2":null,"Participant3":null}]
+    
     
     
