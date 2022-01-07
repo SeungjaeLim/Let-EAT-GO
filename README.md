@@ -73,6 +73,18 @@
   
 ##  api - partys
 
+  ### Format of Instance
+  
+   - `userid` : `카카오톡SDK` 유저 ID
+    
+   - `category` : `KAIST`, `Eoeun`, `Gung`, `KAIST` **Must Be English**
+
+   - `name` : 식당 이름
+
+   - `maxjoin` : `integer` **1 ~ 4**
+
+   - `time` : `YYYYMMDDHHMMSS` - `year + month + day + hour + minute + second`
+    
   ### 파티 만들기
    - HTTP Protocol
    
