@@ -4,6 +4,7 @@
   "description": "server",
   "main": "api.js",
   "scripts": {
+    "start": "nodemon api.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,8 @@
     "date-utils": "^1.2.21",
     "express": "^4.17.2",
     "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
