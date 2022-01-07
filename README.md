@@ -77,7 +77,7 @@
   
    - `userid` : `카카오톡SDK` 유저 ID
     
-   - `category` : `KAIST`, `Eoeun`, `Gung`, `KAIST` **Must Be English**
+   - `category` : `KAIST`, `Eoeun`, `Gung` **Must Be English**
 
    - `name` : 식당 이름
 
