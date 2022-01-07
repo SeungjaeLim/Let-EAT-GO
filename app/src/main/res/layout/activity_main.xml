@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
@@ -14,8 +15,20 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_beforelogin"
-        app:menu="@menu/activity_main_drawer" />
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" >
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="201dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:clickable="true"
+            android:text="LOGIN" />
+
+
+    </com.google.android.material.navigation.NavigationView>
+
 
     <include
         android:id="@+id/app_bar_main"
