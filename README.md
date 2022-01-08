@@ -157,7 +157,7 @@
    
     /api/partys/show/all
     
-   - respond - 모든 파티의 정보를 `json`으로 응답
+   - respond - 모든 파티의 정보를 `time`을 `ascending order`로 정렬해 `json`으로 응답
    
     [{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3},{"id":"PARTY ID","Category":"CATEGORY","Name":"NAME","Joined":MEMBER,"MAXjoin":MAXJOIN,"time":"YEAR-MONTH-DAYTHOUR:MIN:SEC.MILLISECZ","host":"USER ID","Participant1":MEMBER1,"Participant2":MEMBER2,"Participant3":MEMBER3}]
     
