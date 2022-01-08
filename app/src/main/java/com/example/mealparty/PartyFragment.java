@@ -73,9 +73,6 @@ public class PartyFragment extends Fragment {
         {
             requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         }
-        Show_All_Party();
-        Create_Party("12345", "Eoeun", "꼬꾸마시", 4, "20221122150000");
-        Delete_Party("12345", "9017261125");
     }
 
     @Override
@@ -83,16 +80,16 @@ public class PartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_party_list, container, false);
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS));
+        ArrayList<String> list = new ArrayList<>();
+        for(int i = 0 ; i < 100 ; i++) //volley 값 들어갈 곳
+        {
+            list.add(String.format("TEXT %d",i));
         }
+
+        RecyclerView recyclerView = view.findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(list);
+        recyclerView.setAdapter(adapter);
         return view;
     }
 

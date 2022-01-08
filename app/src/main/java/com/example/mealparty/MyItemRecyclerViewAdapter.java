@@ -1,62 +1,53 @@
 package com.example.mealparty;
 
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.mealparty.placeholder.PlaceholderContent.PlaceholderItem;
-import com.example.mealparty.databinding.FragmentPartyBinding;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import java.util.ArrayList;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>{
+    private ArrayList<String> mData = null;
 
-    private final List<PlaceholderItem> mValues;
-
-    public MyItemRecyclerViewAdapter(List<PlaceholderItem> items) {
-        mValues = items;
-    }
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        return new ViewHolder(FragmentPartyBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
-    }
-
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mValues.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public PlaceholderItem mItem;
-
-        public ViewHolder(FragmentPartyBinding binding) {
-            super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView textView1;
+        ViewHolder(View itemView){
+            super(itemView);
+            textView1 = itemView.findViewById(R.id.party_name);
         }
+    }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
+    MyItemRecyclerViewAdapter(ArrayList<String> list)
+    {
+        mData = list;
+    }
+
+    @Override
+    public MyItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        Context context = parent.getContext();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View view = inflater.inflate(R.layout.fragment_party, parent, false);
+        MyItemRecyclerViewAdapter.ViewHolder vh = new MyItemRecyclerViewAdapter.ViewHolder(view);
+
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(MyItemRecyclerViewAdapter.ViewHolder holder, int position)
+    {
+        String text = mData.get(position);
+        holder.textView1.setText(text);
+    }
+
+    @Override
+    public int getItemCount()
+    {
+        return mData.size();
     }
 }
