@@ -29,6 +29,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".AfterLogin"></activity>
+
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>

@@ -1,6 +1,7 @@
 package com.example.mealparty;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -26,6 +27,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -67,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
+    ActionBarDrawerToggle dtToggle;
+
     //
     private ViewPager2 viewPager2;
     //
@@ -82,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         getHashKey();
 
-        setSupportActionBar(binding.appBarMain.toolbar);
+        //setSupportActionBar(binding.appBarMain.toolbar);
         /*binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,33 +97,58 @@ public class MainActivity extends AppCompatActivity {
 
 
         });*/
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+        //DrawerLayout drawer = binding.drawerLayout;
+        //NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
+        /*mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+                .build();*/
+
+
+        //
+
+        //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        //NavigationUI.setupWithNavController(navigationView, navController);
+
+        ///
+        /*navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.nav_home:
+                        Toast.makeText(getApplicationContext(), "SelectedItem 1", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.nav_gallery:
+                        Toast.makeText(getApplicationContext(), "SelectedItem 2", Toast.LENGTH_SHORT).show();
+                        return true;
+                    default:
+                        break;
+                }
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });*/
 
         ////
 
-        navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
+        //navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
 
 
-        ArrayList<Fragment> fragments = new ArrayList<>();
+        //ArrayList<Fragment> fragments = new ArrayList<>();
+        //fragments.clear();
         fragments.add(MenuCrawling.newInstance("01","01"));
         fragments.add(PartyFragment.newInstance(1));
+        fragments.add(MyPageFragment.newInstance("10","10"));
 
         //
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         viewPager2 = (ViewPager2) findViewById(R.id.viewPager2);
-        PageAdapter pageAdapter = new PageAdapter(this, fragments);
+        pageAdapter = new PageAdapter(this, fragments);
         viewPager2.setAdapter(pageAdapter);
-        final List<String> tabElement = Arrays.asList("메뉴","파티");
+        final List<String> tabElement = Arrays.asList("메뉴","파티","마이페이지");
         new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy(){
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position){
@@ -160,12 +190,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });*/
-        binding.buttonLogin.setOnClickListener(this::onClick);
-        binding.appBarMain.contentMain.buttonLogin2.setOnClickListener(this::onClick);
+        //binding.buttonLogin.setOnClickListener(this::onClick);
+        //binding.appBarMain.contentMain.buttonLogin2.setOnClickListener(this::onClick);
         updateKakaoLoginUi();
 
 
     }
+
+
+
     public void onClick(View v){
         Snackbar.make(v, "Replace", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
@@ -191,10 +224,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
     private final static String TAG = "유저";
     private User currentUser;
 
-    public boolean onNavigationItemSelected(MenuItem item){
+    /*public boolean onNavigationItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.nav_home:
                 Toast.makeText(this,"nav home", Toast.LENGTH_LONG).show();
@@ -204,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return false;
-    }
+    }*/
 
 
 
@@ -232,6 +266,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    ArrayList<Fragment> fragments = new ArrayList<>();
+    PageAdapter pageAdapter;
+
+    int BEFORE_LOGIN = 0;
+    int AFTER_LOGIN = 1;
+
+    public void onFragmentChange(int fragmentNum) {
+        if(fragmentNum == BEFORE_LOGIN){
+            //fragments.add(MyPageFragment.newInstance("10","10"));
+            fragments.set(2, MyPageFragment.newInstance("10","10"));
+
+        } else if (fragmentNum == AFTER_LOGIN){
+            fragments.set(2, AfterLoginFragment.newInstance("10","10"));
+        }
+        viewPager2 = (ViewPager2) findViewById(R.id.viewPager2);
+        pageAdapter = new PageAdapter(this, fragments);
+        viewPager2.setAdapter(pageAdapter);
+
+
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -244,6 +300,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState){
+        super.onPostCreate(savedInstanceState);
+
     }
 
     private void getHashKey(){
