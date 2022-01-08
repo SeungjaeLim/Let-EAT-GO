@@ -1,5 +1,5 @@
 # Let EAT Go Server
-    http://172.10.5.55
+    http://192.249.18.138
 ##  api - users
 
   ### 모든 계정 조회하기
