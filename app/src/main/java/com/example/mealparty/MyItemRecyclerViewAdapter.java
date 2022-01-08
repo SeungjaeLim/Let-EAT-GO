@@ -22,6 +22,19 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             textName = itemView.findViewById(R.id.party_name);
             textMember = itemView.findViewById(R.id.party_member);
             textTime = itemView.findViewById(R.id.party_time);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION)
+                    {
+                        Party_Item pitem = mData.get(pos);
+                        System.out.println("Clicked Jobid : " + pitem.jobid);
+                        PartyFragment.Participate_Party("44823", pitem.jobid);
+                    }
+                }
+            });
         }
     }
 

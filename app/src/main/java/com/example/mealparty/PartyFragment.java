@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -44,10 +45,10 @@ public class PartyFragment extends Fragment {
     public static RequestQueue requestQueue;
     ArrayList jidList = new ArrayList();
     int jidcnt = 0;
-    Context ct;
+    static Context ct;
     private static final String TAG = "MAIN";
-    ArrayList<Party_Item> list = new ArrayList<>();
-    MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(list);
+    static ArrayList<Party_Item> list = new ArrayList<>();
+    static MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(list);
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -84,6 +85,7 @@ public class PartyFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_party_list, container, false);
         // Set the adapter
         Show_All_Party();
+        ct = getActivity();
         System.out.println(list);
         RecyclerView recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -92,7 +94,7 @@ public class PartyFragment extends Fragment {
         return view;
     }
 
-    private void Show_All_Party()
+    public static void Show_All_Party()
     {
         String url = "http://192.249.18.138:80";
         url = url + "/api/partys/show/all";
@@ -125,7 +127,7 @@ public class PartyFragment extends Fragment {
                         timeList.add(jsonArray.getJSONObject(i).getString("time"));
                         hostList.add(jsonArray.getJSONObject(i).getString("host"));
                         String formated_time = timeList.get(i).toString().substring(2,10) + " " + timeList.get(i).toString().substring(11,16);
-                        Party_Item partyelem = new Party_Item(JoinedList.get(i) + "/" + MAXjoinList.get(i),formated_time,NameList.get(i).toString());
+                        Party_Item partyelem = new Party_Item(JoinedList.get(i) + "/" + MAXjoinList.get(i),formated_time,NameList.get(i).toString(), idList.get(i).toString());
                         list.add(partyelem);
                     }
                     partyMap.put("id",idList);
@@ -161,9 +163,9 @@ public class PartyFragment extends Fragment {
         System.out.println("Send Request");
     }
 
-    private void Create_Party(String userid, String category, String name, int maxjoin, String time)
+    public void Create_Party(String userid, String category, String name, int maxjoin, String time)
     {
-        String url = "http://192.249.5.55:80";
+        String url = "http://192.249.18.138:80";
         url = url + "/api/partys/create/"+userid+"/"+category+"/"+name+"/"+maxjoin+"/"+time;
         System.out.println(url);
 
@@ -200,7 +202,52 @@ public class PartyFragment extends Fragment {
         System.out.println("Send Request Create");
     }
 
-    private void Delete_Party(String userid, String jobid)
+    public static void Participate_Party(String userid, String jobid)
+    {
+        String url = "http://192.249.18.138:80";
+        url = url + "/api/partys/participate/"+userid+"/"+jobid;
+        System.out.println(url);
+        String Errmsg1 = "already joined";
+        String Errmsg2 = "err-FULL PARTY";
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+
+                if(response.equals(Errmsg1))
+                {
+                    Toast.makeText(ct, "이미 참여하였습니다.", Toast.LENGTH_SHORT);
+                }
+                if(response.equals(Errmsg2))
+                {
+                    Toast.makeText(ct, "꽉 찼습니다.", Toast.LENGTH_SHORT);
+                }
+                list.clear();
+                Show_All_Party();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String,String>();
+                return params;
+            }
+        };
+        request.setTag(TAG);
+        request.setShouldCache(false);
+        requestQueue.add(request);
+        System.out.println("Send Request Participate");
+    }
+
+    public void Delete_Party(String userid, String jobid)
     {
         String url = "http://192.249.5.55:80";
         url = url + "/api/partys/delete/"+userid+"/"+jobid;
