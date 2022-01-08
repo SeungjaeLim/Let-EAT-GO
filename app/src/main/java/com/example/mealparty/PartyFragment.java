@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A fragment representing a list of Items.
@@ -44,7 +46,8 @@ public class PartyFragment extends Fragment {
     int jidcnt = 0;
     Context ct;
     private static final String TAG = "MAIN";
-
+    ArrayList<String> list = new ArrayList<>();
+    MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(list);
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -80,22 +83,18 @@ public class PartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_party_list, container, false);
         // Set the adapter
-        ArrayList<String> list = new ArrayList<>();
-        for(int i = 0 ; i < 100 ; i++) //volley 값 들어갈 곳
-        {
-            list.add(String.format("TEXT %d",i));
-        }
-
+        Show_All_Party();
+        System.out.println(list);
         RecyclerView recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(list);
+
         recyclerView.setAdapter(adapter);
         return view;
     }
 
     private void Show_All_Party()
     {
-        String url = "http://172.10.5.55:80";
+        String url = "http://192.249.18.138:80";
         url = url + "/api/partys/show/all";
 
         Map<String, ArrayList> partyMap = new HashMap<>();
@@ -121,6 +120,7 @@ public class PartyFragment extends Fragment {
                         idList.add(jsonArray.getJSONObject(i).getString("id"));
                         CategoryList.add(jsonArray.getJSONObject(i).getString("Category"));
                         NameList.add(jsonArray.getJSONObject(i).getString("Name"));
+                        list.add(jsonArray.getJSONObject(i).getString("Name"));
                         JoinedList.add(jsonArray.getJSONObject(i).getInt("Joined"));
                         MAXjoinList.add(jsonArray.getJSONObject(i).getInt("MAXjoin"));
                         timeList.add(jsonArray.getJSONObject(i).getString("time"));
@@ -133,6 +133,7 @@ public class PartyFragment extends Fragment {
                     partyMap.put("MAXjoin",MAXjoinList);
                     partyMap.put("time",timeList);
                     partyMap.put("host",hostList);
+                    adapter.notifyDataSetChanged();
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -160,7 +161,7 @@ public class PartyFragment extends Fragment {
 
     private void Create_Party(String userid, String category, String name, int maxjoin, String time)
     {
-        String url = "http://172.10.5.55:80";
+        String url = "http://192.249.5.55:80";
         url = url + "/api/partys/create/"+userid+"/"+category+"/"+name+"/"+maxjoin+"/"+time;
         System.out.println(url);
 
@@ -199,7 +200,7 @@ public class PartyFragment extends Fragment {
 
     private void Delete_Party(String userid, String jobid)
     {
-        String url = "http://172.10.5.55:80";
+        String url = "http://192.249.5.55:80";
         url = url + "/api/partys/delete/"+userid+"/"+jobid;
         System.out.println(url);
 
