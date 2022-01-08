@@ -196,7 +196,7 @@ app.get('/api/partys/show/:jobid', (req, res) => {
   // jobid의 정보 보기
   if(jobid == 'all')
   {
-    let sql_party_all = 'SELECT * from Partys';
+    let sql_party_all = 'SELECT * from Partys ORDER BY time ASC';
     connection.query(sql_party_all, (error, results) => {
       if (error) throw error;
       console.log('All Partys info is: ', results);
