@@ -46,7 +46,7 @@ public class PartyFragment extends Fragment {
     int jidcnt = 0;
     Context ct;
     private static final String TAG = "MAIN";
-    ArrayList<String> list = new ArrayList<>();
+    ArrayList<Party_Item> list = new ArrayList<>();
     MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(list);
 
     /**
@@ -120,11 +120,13 @@ public class PartyFragment extends Fragment {
                         idList.add(jsonArray.getJSONObject(i).getString("id"));
                         CategoryList.add(jsonArray.getJSONObject(i).getString("Category"));
                         NameList.add(jsonArray.getJSONObject(i).getString("Name"));
-                        list.add(jsonArray.getJSONObject(i).getString("Name"));
                         JoinedList.add(jsonArray.getJSONObject(i).getInt("Joined"));
                         MAXjoinList.add(jsonArray.getJSONObject(i).getInt("MAXjoin"));
                         timeList.add(jsonArray.getJSONObject(i).getString("time"));
                         hostList.add(jsonArray.getJSONObject(i).getString("host"));
+                        String formated_time = timeList.get(i).toString().substring(2,10) + " " + timeList.get(i).toString().substring(11,16);
+                        Party_Item partyelem = new Party_Item(JoinedList.get(i) + "/" + MAXjoinList.get(i),formated_time,NameList.get(i).toString());
+                        list.add(partyelem);
                     }
                     partyMap.put("id",idList);
                     partyMap.put("Category",CategoryList);

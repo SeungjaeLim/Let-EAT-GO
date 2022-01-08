@@ -11,17 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>{
-    private ArrayList<String> mData = null;
+    private ArrayList<Party_Item> mData = null;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView textView1;
+        TextView textName;
+        TextView textMember;
+        TextView textTime;
         ViewHolder(View itemView){
             super(itemView);
-            textView1 = itemView.findViewById(R.id.party_name);
+            textName = itemView.findViewById(R.id.party_name);
+            textMember = itemView.findViewById(R.id.party_member);
+            textTime = itemView.findViewById(R.id.party_time);
         }
     }
 
-    MyItemRecyclerViewAdapter(ArrayList<String> list)
+    MyItemRecyclerViewAdapter(ArrayList<Party_Item> list)
     {
         mData = list;
     }
@@ -41,8 +45,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public void onBindViewHolder(MyItemRecyclerViewAdapter.ViewHolder holder, int position)
     {
-        String text = mData.get(position);
-        holder.textView1.setText(text);
+        String textm = mData.get(position).member;
+        holder.textMember.setText(textm);
+
+        String textt = mData.get(position).time;
+        holder.textTime.setText(textt);
+
+        String textn = mData.get(position).name;
+        holder.textName.setText(textn);
     }
 
     @Override
