@@ -2,6 +2,7 @@ package com.example.mealparty;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.fonts.SystemFonts;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -215,7 +216,11 @@ public class PartyFragment extends Fragment {
 
     public static void Participate_Party(String jobid)
     {
-
+        if(userid == null)
+        {
+            System.out.println("null user ID");
+            return;
+        }
         String url = "http://192.249.18.138:80";
         url = url + "/api/partys/participate/"+userid+"/"+jobid;
         System.out.println(url);
@@ -263,37 +268,6 @@ public class PartyFragment extends Fragment {
         System.out.println("Send Request Participate");
     }
 
-    public void Delete_Party(String userid, String jobid)
-    {
-        String url = "http://192.249.5.55:80";
-        url = url + "/api/partys/delete/"+userid+"/"+jobid;
-        System.out.println(url);
-
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onResponse(String response) {
-                System.out.println(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        }
-        ){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String,String>();
-                return params;
-            }
-        };
-        request.setTag(TAG);
-        request.setShouldCache(false);
-        requestQueue.add(request);
-        System.out.println("Send Request Delete");
-    }
 
     public void updateKakaoLoginUi(){
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
