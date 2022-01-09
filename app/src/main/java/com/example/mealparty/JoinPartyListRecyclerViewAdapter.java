@@ -7,15 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>{
+public class JoinPartyListRecyclerViewAdapter extends RecyclerView.Adapter<JoinPartyListRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Party_Item> mData = null;
-    private Context context;
+    Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView textName;
@@ -37,11 +36,11 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         System.out.println("Clicked Jobid : " + pitem.jobid);
                         new AlertDialog.Builder(context)
                                 .setTitle(pitem.time+ " " + pitem.name)
-                                .setMessage("참여하시겠습니까?")
+                                .setMessage("탈퇴하시겠습니까?")
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
                                         // 확인시 처리 로직
-                                        PartyFragment.Participate_Party(pitem.jobid);
+                                        JoinPartyList.Resign_Party(pitem.jobid);
                                     }})
                                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -54,24 +53,25 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         }
     }
 
-    MyItemRecyclerViewAdapter(ArrayList<Party_Item> list)
+    JoinPartyListRecyclerViewAdapter(ArrayList<Party_Item> list)
     {
         mData = list;
     }
 
     @Override
-    public MyItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public JoinPartyListRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         View view = inflater.inflate(R.layout.fragment_party, parent, false);
-        MyItemRecyclerViewAdapter.ViewHolder vh = new MyItemRecyclerViewAdapter.ViewHolder(view);
+        JoinPartyListRecyclerViewAdapter.ViewHolder vh = new JoinPartyListRecyclerViewAdapter.ViewHolder(view);
 
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(MyItemRecyclerViewAdapter.ViewHolder holder, int position)
+    public void onBindViewHolder(JoinPartyListRecyclerViewAdapter.ViewHolder holder, int position)
     {
         String textm = mData.get(position).member;
         holder.textMember.setText(textm);
@@ -89,3 +89,4 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         return mData.size();
     }
 }
+

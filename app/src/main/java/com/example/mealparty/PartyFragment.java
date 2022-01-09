@@ -3,6 +3,7 @@ package com.example.mealparty;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.fonts.SystemFonts;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,9 +12,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -25,6 +28,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mealparty.placeholder.PlaceholderContent;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,11 +40,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
+
 /**
  * A fragment representing a list of Items.
  */
 public class PartyFragment extends Fragment {
 
+    static String userid;
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
@@ -93,6 +102,7 @@ public class PartyFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         recyclerView.setAdapter(adapter);
+        updateKakaoLoginUi();
 
         //create button
         Button partyCreateButton = (Button) view.findViewById(R.id.create_button);
@@ -139,7 +149,9 @@ public class PartyFragment extends Fragment {
                         MAXjoinList.add(jsonArray.getJSONObject(i).getInt("MAXjoin"));
                         timeList.add(jsonArray.getJSONObject(i).getString("time"));
                         hostList.add(jsonArray.getJSONObject(i).getString("host"));
-                        String formated_time = timeList.get(i).toString().substring(2,10) + " " + timeList.get(i).toString().substring(11,16);
+                        String date_ = timeList.get(i).toString().substring(5,10);
+                        String time_ = timeList.get(i).toString().substring(11,16);
+                        String formated_time = date_.substring(0,2) + "월 " + date_.substring(3,5) + "일 " + time_.substring(0,2) + "시 " + time_.substring(3,5)+ "분";
                         Party_Item partyelem = new Party_Item(JoinedList.get(i) + "/" + MAXjoinList.get(i),formated_time,NameList.get(i).toString(), idList.get(i).toString());
                         list.add(partyelem);
                     }
@@ -176,7 +188,7 @@ public class PartyFragment extends Fragment {
         System.out.println("Send Request");
     }
 
-    public void Create_Party(String userid, String category, String name, int maxjoin, String time)
+    public void Create_Party(String category, String name, int maxjoin, String time)
     {
         String url = "http://192.249.18.138:80";
         url = url + "/api/partys/create/"+userid+"/"+category+"/"+name+"/"+maxjoin+"/"+time;
@@ -215,8 +227,13 @@ public class PartyFragment extends Fragment {
         System.out.println("Send Request Create");
     }
 
-    public static void Participate_Party(String userid, String jobid)
+    public static void Participate_Party(String jobid)
     {
+        if(userid == null)
+        {
+            System.out.println("null user ID");
+            return;
+        }
         String url = "http://192.249.18.138:80";
         url = url + "/api/partys/participate/"+userid+"/"+jobid;
         System.out.println(url);
@@ -233,9 +250,13 @@ public class PartyFragment extends Fragment {
                 {
                     Toast.makeText(ct, "이미 참여하였습니다.", Toast.LENGTH_SHORT).show();
                 }
-                if(response.equals(Errmsg2))
+                else if(response.equals(Errmsg2))
                 {
                     Toast.makeText(ct, "꽉 찼습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(ct, "파티에 참여하였습니다.", Toast.LENGTH_SHORT).show();
                 }
                 list.clear();
                 Show_All_Party();
@@ -260,36 +281,27 @@ public class PartyFragment extends Fragment {
         System.out.println("Send Request Participate");
     }
 
-    public void Delete_Party(String userid, String jobid)
-    {
-        String url = "http://192.249.5.55:80";
-        url = url + "/api/partys/delete/"+userid+"/"+jobid;
-        System.out.println(url);
 
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+    public void updateKakaoLoginUi(){
+        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+            @Override
+            public Unit invoke(User user, Throwable throwable) {
+                if (user !=null){
+                    Log.i(TAG, "id" + user.getId());
+                    Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
+                    Log.i(TAG, "userimage" + user.getKakaoAccount().getProfile().getProfileImageUrl());
 
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onResponse(String response) {
-                System.out.println(response);
+                    userid = "" + user.getId();
+
+
+                    //로그인 정상적으로 되었을 경우 수행하는 코드 적
+                }
+                if(throwable != null){
+                    //로그인 오류
+                    Log.w(TAG, "invoke: "+throwable.getLocalizedMessage());
+                }
+                return null;
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        }
-        ){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String,String>();
-                return params;
-            }
-        };
-        request.setTag(TAG);
-        request.setShouldCache(false);
-        requestQueue.add(request);
-        System.out.println("Send Request Delete");
+        });
     }
-
 }

@@ -1,5 +1,6 @@
 package com.example.mealparty;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,9 +17,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.transition.FadeThroughProvider;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +42,7 @@ public class AfterLoginFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    public static RequestQueue requestQueue;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -64,6 +75,10 @@ public class AfterLoginFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+        if(requestQueue == null)
+        {
+            requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         }
     }
 
@@ -133,6 +148,34 @@ public class AfterLoginFragment extends Fragment {
                     String Nickname = user.getKakaoAccount().getProfile().getNickname();
                     nickname.setText(Nickname);
 
+                    String url = "http://192.249.18.138:80";
+                    url = url + "/api/users/"+user.getId()+"/"+user.getKakaoAccount().getProfile().getNickname();
+                    System.out.println(url);
+                    StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onResponse(String response) {
+                            System.out.println(response);
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            System.out.println(error);
+                        }
+                    }
+                    ){
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String,String> params = new HashMap<String,String>();
+                            return params;
+                        }
+                    };
+                    request.setTag(TAG);
+                    request.setShouldCache(false);
+                    requestQueue.add(request);
+                    System.out.println("Send Request Participate");
 
                     //로그인 정상적으로 되었을 경우 수행하는 코드 적
                 }
