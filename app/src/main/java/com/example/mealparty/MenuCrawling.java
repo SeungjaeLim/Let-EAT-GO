@@ -3,8 +3,10 @@ package com.example.mealparty;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -22,7 +24,10 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -118,8 +123,6 @@ public class MenuCrawling extends Fragment implements View.OnClickListener {
     int PICK_WEST = 1;
     int PICK_EAST = 2;
 
-
-
     @Override
     public void onClick(View v){
         switch(v.getId()){
@@ -160,113 +163,134 @@ public class MenuCrawling extends Fragment implements View.OnClickListener {
             asyncDialog.show();
             super.onPreExecute();
         }
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         protected ArrayList<ListData> doInBackground(Void... voids){
             //ArrayList<ListData> arrayList = new ArrayList<ListData>();
             try {
-                long now = System.currentTimeMillis();
+                /*long now = System.currentTimeMillis();
                 Date date = new Date(now);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String getTime = sdf.format(date);
+                String getTime = sdf.format(date);*/
 
-                //KAMA_LUNCH & DINNER CRAWLING
-                String URL_kama = "https://www.kaist.ac.kr/kr/html/campus/053001.html?dvs_cd=fclt&stt_dt=" + getTime;
-                Document document = (Document) Jsoup.connect(URL_kama).get();
-                //Elements doc = document.select("table.table > tbody > tr");
-                Elements doc = document.select("ul.list-1st");
-                int i = 0;
-                String[] menu= new String[2];
-                for (Element e : doc) {
-                    menu[i] = e.html();
-                    i++;
-                }
+                LocalDate nowDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                //String getTime = nowDate.format(formatter);
 
-                String[] kama_lunch = menu[0].split("<br>");
-                i = 0;
-                for(String t : kama_lunch){
-                    kama_lunch[i] = t.trim();
-                    i++;
-                }
-                String[] kama_dinner = menu[1].split("<br>");
-                i = 0;
-                for(String t : kama_dinner){
-                    kama_dinner[i] = t.trim();
-                    i++;
-                }
 
-                //check
+
+
+
+                Calendar cal = Calendar.getInstance();
+                int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+                // 1= 월요일, 7 = 일요일
+
+                int count = 8 - dayOfWeek; // 일요일은 반복문 1번, 토요일은 2번, ... , 월요일은 7
+                int plusDay = 0;
+                while ( count > 0 ) {
+                    LocalDate curDate = nowDate.plusDays(plusDay);
+                    String getTime = curDate.format(formatter);
+
+                    //KAMA_LUNCH & DINNER CRAWLING
+                    String URL_kama = "https://www.kaist.ac.kr/kr/html/campus/053001.html?dvs_cd=fclt&stt_dt=" + getTime;
+                    Document document = (Document) Jsoup.connect(URL_kama).get();
+                    //Elements doc = document.select("table.table > tbody > tr");
+                    Elements doc = document.select("ul.list-1st");
+                    int i = 0;
+                    String[] menu = new String[2];
+                    for (Element e : doc) {
+                        menu[i] = e.html();
+                        i++;
+                    }
+
+                    String[] kama_lunch = menu[0].split("<br>");
+                    i = 0;
+                    for (String t : kama_lunch) {
+                        kama_lunch[i] = t.trim();
+                        i++;
+                    }
+                    String[] kama_dinner = menu[1].split("<br>");
+                    i = 0;
+                    for (String t : kama_dinner) {
+                        kama_dinner[i] = t.trim();
+                        i++;
+                    }
+
+                    //check
                 /*for(String t : kama_dinner){
                     System.out.println("*");
                     System.out.println(t);
                 }*/
-                //
+                    //
 
-                //WEST_BREAKFAST & LUNCH & DINNER CRAWLING
-                String URL_west = "https://www.kaist.ac.kr/kr/html/campus/053001.html?dvs_cd=west&stt_dt="+ getTime;
-                document = (Document) Jsoup.connect(URL_west).get();
-                Element morning = document.select("table.table > tbody > tr > td").first();
-                doc = document.select("ul.list-1st");
+                    //WEST_BREAKFAST & LUNCH & DINNER CRAWLING
+                    String URL_west = "https://www.kaist.ac.kr/kr/html/campus/053001.html?dvs_cd=west&stt_dt=" + getTime;
+                    document = (Document) Jsoup.connect(URL_west).get();
+                    Element morning = document.select("table.table > tbody > tr > td").first();
+                    doc = document.select("ul.list-1st");
 
-                i = 0;
-                for (Element e : doc) {
-                    menu[i] = e.html();
-                    i++;
-                }
-                String morning_tmp = trimMenu(morning.html());
+                    i = 0;
+                    for (Element e : doc) {
+                        menu[i] = e.html();
+                        i++;
+                    }
+                    String morning_tmp = trimMenu(morning.html());
 
-                String[] west_breakfast = morning_tmp.split("<br>");
-                i = 0;
-                for(String t : west_breakfast){
-                    west_breakfast[i] = t.trim();
-                    i++;
-                }
-                String[] west_lunch = menu[0].split("<br>");
-                i = 0;
-                for(String t : west_lunch){
-                    west_lunch[i] = t.trim();
-                    i++;
-                }
-                String[] west_dinner = menu[1].split("<br>");
-                i = 0;
-                for(String t : west_dinner){
-                    west_dinner[i] = t.trim();
-                    i++;
-                }
+                    String[] west_breakfast = morning_tmp.split("<br>");
+                    i = 0;
+                    for (String t : west_breakfast) {
+                        west_breakfast[i] = t.trim();
+                        i++;
+                    }
+                    String[] west_lunch = menu[0].split("<br>");
+                    i = 0;
+                    for (String t : west_lunch) {
+                        west_lunch[i] = t.trim();
+                        i++;
+                    }
+                    String[] west_dinner = menu[1].split("<br>");
+                    i = 0;
+                    for (String t : west_dinner) {
+                        west_dinner[i] = t.trim();
+                        i++;
+                    }
 
-                //EAST_BREAKFAST & LUNCH & DINNER CRAWLING
-                String URL_east = "https://www.kaist.ac.kr/kr/html/campus/053001.html?dvs_cd=east1&stt_dt="+ getTime;
-                document = (Document) Jsoup.connect(URL_east).get();
-                morning = document.select("table.table > tbody > tr > td").first();
-                doc = document.select("ul.list-1st");
+                    //EAST_BREAKFAST & LUNCH & DINNER CRAWLING
+                    String URL_east = "https://www.kaist.ac.kr/kr/html/campus/053001.html?dvs_cd=east1&stt_dt=" + getTime;
+                    document = (Document) Jsoup.connect(URL_east).get();
+                    morning = document.select("table.table > tbody > tr > td").first();
+                    doc = document.select("ul.list-1st");
 
-                i = 0;
-                for (Element e : doc) {
-                    menu[i] = trimMenu(e.html());
-                    i++;
-                }
+                    i = 0;
+                    for (Element e : doc) {
+                        menu[i] = trimMenu(e.html());
+                        i++;
+                    }
 
-                morning_tmp = trimMenu(morning.html());
-                String[] east_breakfast = morning_tmp.split("<br>");
-                i = 0;
-                for(String t : east_breakfast){
-                     east_breakfast[i] = t.trim();
-                     i++;
-                }
-                String[] east_lunch = menu[0].split("<br>");
-                i = 0;
-                for(String t : east_lunch){
-                    east_lunch[i] = t.trim();
-                    i++;
-                }
-                String[] east_dinner = menu[1].split("<br>");
-                i= 0;
-                for(String t : east_dinner){
-                    east_dinner[i] = t.trim();
-                    i++;
-                }
+                    morning_tmp = trimMenu(morning.html());
+                    String[] east_breakfast = morning_tmp.split("<br>");
+                    i = 0;
+                    for (String t : east_breakfast) {
+                        east_breakfast[i] = t.trim();
+                        i++;
+                    }
+                    String[] east_lunch = menu[0].split("<br>");
+                    i = 0;
+                    for (String t : east_lunch) {
+                        east_lunch[i] = t.trim();
+                        i++;
+                    }
+                    String[] east_dinner = menu[1].split("<br>");
+                    i = 0;
+                    for (String t : east_dinner) {
+                        east_dinner[i] = t.trim();
+                        i++;
+                    }
 
-                arrayList.add(new ListData(getTime,kama_lunch,kama_dinner,west_breakfast,west_lunch,west_dinner,east_breakfast,east_lunch,east_dinner));
-
+                    arrayList.add(new ListData(getTime, kama_lunch, kama_dinner, west_breakfast, west_lunch, west_dinner, east_breakfast, east_lunch, east_dinner));
+                    count = count - 1;
+                    plusDay = plusDay + 1;
+                } //end of while
             } catch (Exception e){
                 e.printStackTrace();
             }
