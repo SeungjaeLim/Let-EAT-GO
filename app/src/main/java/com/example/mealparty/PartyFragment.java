@@ -188,45 +188,6 @@ public class PartyFragment extends Fragment {
         System.out.println("Send Request");
     }
 
-    public void Create_Party(String category, String name, int maxjoin, String time)
-    {
-        String url = "http://192.249.18.138:80";
-        url = url + "/api/partys/create/"+userid+"/"+category+"/"+name+"/"+maxjoin+"/"+time;
-        System.out.println(url);
-
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onResponse(String response) {
-                System.out.println(response);
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    jidList.add(jsonObject.getString("id"));
-                    jidcnt++;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        }
-        ){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String,String>();
-                return params;
-            }
-        };
-        request.setTag(TAG);
-        request.setShouldCache(false);
-        requestQueue.add(request);
-        System.out.println("Send Request Create");
-    }
-
     public static void Participate_Party(String jobid)
     {
         if(userid == null)
