@@ -60,8 +60,8 @@ app.get('/api/users/:id', (req, res) => {
   }
 });
 
-app.get('/api/users/:id/:email', (req, res) => {
-  let {id, email} = req.params;
+app.get('/api/users/:id/:nickname', (req, res) => {
+  let {id, nickname} = req.params;
   if(id == 'all')
   {
     var sql_user_all = 'SELECT * from Users';
@@ -80,7 +80,7 @@ app.get('/api/users/:id/:email', (req, res) => {
       if(!parseInt(existSTR[12]))
       {
         console.log('No exist');
-        connection.query('INSERT INTO Users (id,email) VALUES (\''+id+'\', \''+email+ '\');', (error, ins_res) => {
+        connection.query('INSERT INTO Users (id,nickname) VALUES (\''+id+'\', \''+nickname+ '\');', (error, ins_res) => {
           if (error) throw error;
         });
       }
