@@ -249,7 +249,7 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
             connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
               if (err) throw err;
               console.log("2/n -> 2 resign");
-              res.send("2/n -> 2 resign");
+              res.send("Resign Successed");
             });
           }
           else if(results[0].Joined == 3)
@@ -262,7 +262,7 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
               connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
                 if (err) throw err;
                 console.log("3/n -> 2 resign");
-                res.send("3/n -> 2 resign");
+                res.send("Resign Successed");
               });
             }
             if(resign_idx == 2)
@@ -273,7 +273,7 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
               connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
                 if (err) throw err;
                 console.log("3/n -> 3 resign");
-                res.send("3/n -> 3 resign");
+                res.send("Resign Successed");
               });
             }
           }  
@@ -288,7 +288,7 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
               connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
                 if (err) throw err;
                 console.log("4/n -> 2 resign");
-                res.send("4/n -> 2 resign");
+                res.send("Resign Successed");
               });
             }
             if(resign_idx == 2)
@@ -300,7 +300,7 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
               connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
                 if (err) throw err;
                 console.log("4/n -> 3 resign");
-                res.send("4/n -> 3 resign");
+                res.send("Resign Successed");
               });
             }
             if(resign_idx == 3)
@@ -313,7 +313,7 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
               connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
                 if (err) throw err;
                 console.log("4/n -> 4 resign");
-                res.send("4/n -> 4 resign");
+                res.send("Resign Successed");
               });
             }
           }    
