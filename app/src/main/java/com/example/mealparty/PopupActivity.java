@@ -44,6 +44,7 @@ public class PopupActivity extends AppCompatActivity {
 
         if(dayOfWeek == 7){
             numberPicker.setMinValue(7);
+            numberPicker.setMaxValue(7);
         }else {
             numberPicker.setMaxValue(7);
             numberPicker.setMinValue(dayOfWeek);
@@ -55,6 +56,7 @@ public class PopupActivity extends AppCompatActivity {
 
         LocalDate nowDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
         NumberPicker.Formatter mFormatter = new NumberPicker.Formatter() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -68,7 +70,7 @@ public class PopupActivity extends AppCompatActivity {
         };
 
 
-        numberPicker.setFormatter(mFormatter);
+        //numberPicker.setFormatter(mFormatter);
 
         Intent intent = getIntent();
 

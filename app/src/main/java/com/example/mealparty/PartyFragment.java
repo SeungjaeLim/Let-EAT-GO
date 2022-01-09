@@ -218,11 +218,11 @@ public class PartyFragment extends Fragment {
 
                 if(response.equals(Errmsg1))
                 {
-                    Toast.makeText(ct, "이미 참여하였습니다.", Toast.LENGTH_SHORT);
+                    Toast.makeText(ct, "이미 참여하였습니다.", Toast.LENGTH_SHORT).show();
                 }
                 if(response.equals(Errmsg2))
                 {
-                    Toast.makeText(ct, "꽉 찼습니다.", Toast.LENGTH_SHORT);
+                    Toast.makeText(ct, "꽉 찼습니다.", Toast.LENGTH_SHORT).show();
                 }
                 list.clear();
                 Show_All_Party();
