@@ -45,8 +45,11 @@ import kotlin.jvm.functions.Function2;
 import com.example.mealparty.databinding.ActivityMainBinding;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.kakao.auth.authorization.accesstoken.AccessToken;
 import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.user.UserApi;
 import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.AccessTokenInfo;
 import com.kakao.sdk.user.model.User;
 
 import org.jsoup.Jsoup;
@@ -79,14 +82,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //StrictMode.enableDefaults();
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        getHashKey();
-
+        //getHashKey();
         //setSupportActionBar(binding.appBarMain.toolbar);
         /*binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-
-
         });*/
         //DrawerLayout drawer = binding.drawerLayout;
         //NavigationView navigationView = binding.navView;
@@ -105,10 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
                 .build();*/
-
-
         //
-
         //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         //NavigationUI.setupWithNavController(navigationView, navController);
@@ -137,11 +131,18 @@ public class MainActivity extends AppCompatActivity {
         //navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
 
 
+
         //ArrayList<Fragment> fragments = new ArrayList<>();
         //fragments.clear();
         fragments.add(MenuCrawling.newInstance("01","01"));
         fragments.add(PartyFragment.newInstance(1));
-        fragments.add(MyPageFragment.newInstance("10","10"));
+        //fragments.add(MyPageFragment.newInstance("10","10"));
+        fragments.add(AfterLoginFragment.newInstance("10","10"));
+
+
+
+
+
 
         //
         TabLayout tabLayout = findViewById(R.id.tab_layout);
@@ -254,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, "id" + user.getId());
                     Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "userimage" + user.getKakaoAccount().getProfile().getProfileImageUrl());
-
                     //로그인 정상적으로 되었을 경우 수행하는 코드 적
                 }
                 if(throwable != null){

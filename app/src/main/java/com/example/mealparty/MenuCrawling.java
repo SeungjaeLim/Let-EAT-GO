@@ -183,10 +183,14 @@ public class MenuCrawling extends Fragment implements View.OnClickListener {
 
                 Calendar cal = Calendar.getInstance();
                 int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-                // 1= 월요일, 7 = 일요일
+                // 1=일 요일, 7 = 토 요일
 
-                int count = 8 - dayOfWeek; // 일요일은 반복문 1번, 토요일은 2번, ... , 월요일은 7
+                int count = 9 - dayOfWeek; // 일요일은 반복문 1번, 토요일은 2번, ... , 월요일은 7
                 int plusDay = 0;
+                if(dayOfWeek == 1){
+                    //일요일일떄
+                    count = 1;
+                }
                 while ( count > 0 ) {
                     LocalDate curDate = nowDate.plusDays(plusDay);
                     String getTime = curDate.format(formatter);

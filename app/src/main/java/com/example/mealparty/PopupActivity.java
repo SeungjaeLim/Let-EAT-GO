@@ -41,16 +41,15 @@ public class PopupActivity extends AppCompatActivity {
 
         Calendar cal = Calendar.getInstance();
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+        System.out.println("Today is"+dayOfWeek+"\n");
 
-        if(dayOfWeek == 7){
-            numberPicker.setMinValue(7);
-            numberPicker.setMaxValue(7);
-        }else {
-            numberPicker.setMaxValue(7);
+        if(dayOfWeek == 1){ //일요일일떄
+            numberPicker.setMinValue(1);
+            numberPicker.setMaxValue(1);
+        } else {
+            numberPicker.setMaxValue(8);
             numberPicker.setMinValue(dayOfWeek);
-
         }
-
 
         numberPicker.setWrapSelectorWheel(false);
 
@@ -62,15 +61,22 @@ public class PopupActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public String format(int i) {
-                int cur = i-dayOfWeek; //0이면 당일, 1이면 내일 ,...최대 6
-                LocalDate curDate = nowDate.plusDays(cur);
-                String pickerdate = curDate.format(formatter);
+
+                String pickerdate;
+
+                if(dayOfWeek == 1){
+                    pickerdate = nowDate.format(formatter);
+                } else{
+                    int cur = i-dayOfWeek;//0이면 당일, 1이면 내일 ,...최대 6
+                    LocalDate curDate = nowDate.plusDays(cur);
+                    pickerdate = curDate.format(formatter);
+                }
                 return pickerdate;
             }
         };
+        numberPicker.setFormatter(mFormatter);
 
 
-        //numberPicker.setFormatter(mFormatter);
 
         Intent intent = getIntent();
 
@@ -85,11 +91,69 @@ public class PopupActivity extends AppCompatActivity {
 
         models = (ArrayList<ListData>) intent.getSerializableExtra("menu");
         place = intent.getIntExtra("식당",DEFAULT_VAL);
-
         ArrayList<Fragment> fragments = new ArrayList<>();
+
+
+
+
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                ListData MenuList = null;
+                int cur = i1 - dayOfWeek;
+                LocalDate curDate = nowDate.plusDays(cur);
+                String selectedDate = curDate.format(formatter);
+
+                for(ListData tmpList : models){
+                    String datatime = tmpList.getDate();
+                    System.out.println(datatime+"\n\n\n");
+                    if(datatime != null) {
+                        if (datatime.equals(selectedDate)) {
+                            MenuList = tmpList;
+                            break;
+                        }
+                    }
+                }
+
+                switch(place){
+                    case 0:
+                        fragments.clear();
+                        fragments.add(MealItem.newInstance(MenuList.getKama_lunch()));
+                        fragments.add(MealItem.newInstance(MenuList.getKama_dinner()));
+
+                        break;
+                    case 1:
+                        fragments.clear();
+                        fragments.add(MealItem.newInstance(MenuList.getWest_breakfast()));
+                        fragments.add(MealItem.newInstance(MenuList.getWest_lunch()));
+                        fragments.add(MealItem.newInstance(MenuList.getWest_dinner()));
+                        break;
+                    case 2:
+                        fragments.clear();
+                        fragments.add(MealItem.newInstance(MenuList.getEast_breakfast()));
+                        fragments.add(MealItem.newInstance(MenuList.getEast_lunch()));
+                        fragments.add(MealItem.newInstance(MenuList.getEast_dinner()));
+                        break;
+                }
+
+                ModelAdapter modelAdapter = new ModelAdapter(PopupActivity.this, place, fragments);
+
+                viewPager = (ViewPager2) findViewById(R.id.popup_viewpager);
+                viewPager.setAdapter(modelAdapter);
+
+
+
+
+
+            }
+        });
+
+        //ArrayList<Fragment> fragments = new ArrayList<>();
         //ArrayList<String[]> menudata = new ArrayList<>();
 
         ListData MenuList = null;
+
         if(models.isEmpty()==true){
             System.out.println("EMPTY");
         }else{
@@ -112,7 +176,6 @@ public class PopupActivity extends AppCompatActivity {
                 fragments.clear();
                 fragments.add(MealItem.newInstance(MenuList.getKama_lunch()));
                 fragments.add(MealItem.newInstance(MenuList.getKama_dinner()));
-
                 break;
             case 1:
                 fragments.clear();
@@ -136,8 +199,6 @@ public class PopupActivity extends AppCompatActivity {
 
         viewPager = (ViewPager2) findViewById(R.id.popup_viewpager);
         viewPager.setAdapter(modelAdapter);
-
-
 
     }
 }
