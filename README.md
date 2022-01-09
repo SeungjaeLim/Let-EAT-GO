@@ -192,7 +192,7 @@
    
    - respond example
    
-     [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":4,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"2022012496","Participant1":"2022345496","Participant2":"2022678496","Participant3":"2022901496"},{"id":"7017181466","Category":"Eoeun","Name":"투다리","Joined":1,"MAXjoin":4,"time":"2022-01-07T22:00:00.000Z","host":"2022012496","Participant1":null,"Participant2":null,"Participant3":null},{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":4,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"2022345496","Participant1":"2022012496","Participant2":"2022346496","Participant3":"3122345496"},{"id":"7017181466","Category":"Eoeun","Name":"투다리","Joined":1,"MAXjoin":4,"time":"2022-01-07T22:00:00.000Z","host":"0123456789","Participant1":"2022012496","Participant2":null,"Participant3":null}]
+    [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":4,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"2022012496","Participant1":"2022345496","Participant2":"2022678496","Participant3":"2022901496"},{"id":"7017181466","Category":"Eoeun","Name":"투다리","Joined":1,"MAXjoin":4,"time":"2022-01-07T22:00:00.000Z","host":"2022012496","Participant1":null,"Participant2":null,"Participant3":null},{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":4,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"2022345496","Participant1":"2022012496","Participant2":"2022346496","Participant3":"3122345496"},{"id":"7017181466","Category":"Eoeun","Name":"투다리","Joined":1,"MAXjoin":4,"time":"2022-01-07T22:00:00.000Z","host":"0123456789","Participant1":"2022012496","Participant2":null,"Participant3":null}]
     
    ### 특정 파티 조회
    - HTTP Protocol
@@ -209,7 +209,7 @@
    
    - respond example
    
-        [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":1,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"2022012496","Participant1":null,"Participant2":null,"Participant3":null}]
+    [{"id":"1017182317","Category":"Eoeun","Name":"밀과보리","Joined":1,"MAXjoin":4,"time":"2022-01-07T18:30:00.000Z","host":"2022012496","Participant1":null,"Participant2":null,"Participant3":null}]
     
    ### 카테고리 조희
    - HTTP Protocol
