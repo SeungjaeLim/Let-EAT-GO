@@ -31,7 +31,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                     {
                         Party_Item pitem = mData.get(pos);
                         System.out.println("Clicked Jobid : " + pitem.jobid);
-                        PartyFragment.Participate_Party("44823", pitem.jobid);
+                        PartyFragment.Participate_Party(pitem.jobid);
                     }
                 }
             });
