@@ -135,7 +135,9 @@ public class PartyFragment extends Fragment {
                         MAXjoinList.add(jsonArray.getJSONObject(i).getInt("MAXjoin"));
                         timeList.add(jsonArray.getJSONObject(i).getString("time"));
                         hostList.add(jsonArray.getJSONObject(i).getString("host"));
-                        String formated_time = timeList.get(i).toString().substring(2,10) + " " + timeList.get(i).toString().substring(11,16);
+                        String date_ = timeList.get(i).toString().substring(5,10);
+                        String time_ = timeList.get(i).toString().substring(11,16);
+                        String formated_time = date_.substring(0,2) + "월 " + date_.substring(3,5) + "일 " + time_.substring(0,2) + "시 " + time_.substring(3,5)+ "분";
                         Party_Item partyelem = new Party_Item(JoinedList.get(i) + "/" + MAXjoinList.get(i),formated_time,NameList.get(i).toString(), idList.get(i).toString());
                         list.add(partyelem);
                     }
@@ -230,7 +232,7 @@ public class PartyFragment extends Fragment {
                 {
                     Toast.makeText(ct, "이미 참여하였습니다.", Toast.LENGTH_SHORT).show();
                 }
-                if(response.equals(Errmsg2))
+                else if(response.equals(Errmsg2))
                 {
                     Toast.makeText(ct, "꽉 찼습니다.", Toast.LENGTH_SHORT).show();
                 }
