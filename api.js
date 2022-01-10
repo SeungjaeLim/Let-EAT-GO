@@ -373,7 +373,7 @@ app.get('/api/partys/show/:jobid', (req, res) => {
     }
     let servertime = _year +'-'+ _month +'-'+ _date;
     console.log(servertime);
-    let sql_party_all = 'SELECT * from Partys WHERE DATE(time) BETWEEN \'' + servertime + '\' AND' +'\'2099-01-23\''; /*+' ORDER BY time ASC';*/
+    let sql_party_all = 'SELECT * from Partys WHERE DATE(time) BETWEEN \'' + servertime + '\' AND' +'\'2099-01-23\' ORDER BY time ASC'; 
     connection.query(sql_party_all, (error, results) => {
       if (error) throw error;
       console.log('All Partys info is: ', results);
