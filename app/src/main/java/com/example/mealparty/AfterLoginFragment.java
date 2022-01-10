@@ -103,8 +103,10 @@ public class AfterLoginFragment extends Fragment {
                         return null;
                     }
                 });
-                activity = (MainActivity)getActivity();
-                activity.onFragmentChange(0);
+                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
+                //activity = (MainActivity)getActivity();
+                //activity.onFragmentChange(0);
             }
         });
 

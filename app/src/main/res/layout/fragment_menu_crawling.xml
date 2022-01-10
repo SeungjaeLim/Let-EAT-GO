@@ -4,18 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuCrawling">
+    android:background="@drawable/background"
+    tools:context=".MenuCrawling"
+    tools:visibility="visible">
 
     <Button
         android:id="@+id/button_kama"
+        style="@style/Widget.AppCompat.Button"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
         android:background="@drawable/menubutton"
+
+        android:backgroundTint="#FFFFFF"
+        android:backgroundTintMode="multiply"
+        android:elevation="1000dp"
         android:text="카이마루"
         app:layout_constraintBottom_toTopOf="@+id/button_west"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -27,6 +35,10 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/menubutton"
+        android:backgroundTint="#FFFFFF"
+        android:backgroundTintMode="multiply"
+        android:color="@android:color/transparent"
+        android:elevation="100dp"
         android:text="서맛골"
         app:layout_constraintBottom_toTopOf="@+id/button_east"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,14 +46,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_kama"
         app:layout_constraintVertical_bias="0.21"
+        app:rippleColor="#00FFFFFF"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button_east"
         android:layout_width="wrap_content"
-        android:layout_height="119dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="180dp"
         android:background="@drawable/menubutton"
+        android:backgroundTint="#FFFFFF"
+        android:backgroundTintMode="multiply"
+        android:elevation="10dp"
         android:text="동맛골"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

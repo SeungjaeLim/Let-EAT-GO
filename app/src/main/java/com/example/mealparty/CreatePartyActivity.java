@@ -1,5 +1,6 @@
 package com.example.mealparty;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -29,6 +30,9 @@ public class CreatePartyActivity extends AppCompatActivity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_create_party);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         String[] categoryItem = new String[]{"카이스트","어은동","궁동","둔산동","기타"};
 

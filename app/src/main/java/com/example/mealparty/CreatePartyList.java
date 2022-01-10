@@ -1,5 +1,6 @@
 package com.example.mealparty;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,6 +57,9 @@ public class CreatePartyList extends AppCompatActivity {
         System.out.println(list);
         RecyclerView recyclerView = findViewById(R.id.Cpartylist);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
 
         recyclerView.setAdapter(adapter);
     }

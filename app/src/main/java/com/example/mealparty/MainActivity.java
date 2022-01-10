@@ -130,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
 
         //navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
 
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+
 
 
         //ArrayList<Fragment> fragments = new ArrayList<>();

@@ -12,10 +12,11 @@
         android:theme="@style/Theme.Mealparty"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreatePartyActivity"
             android:exported="false" />
-
-
         <activity android:name=".MyPageFragment" />
         <activity
             android:name=".JoinPartyList"

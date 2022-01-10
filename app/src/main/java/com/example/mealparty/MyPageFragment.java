@@ -34,7 +34,6 @@ public class MyPageFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -81,7 +80,6 @@ public class MyPageFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     View rootView;
@@ -107,6 +105,7 @@ public class MyPageFragment extends Fragment {
             UserApiClient.getInstance().loginWithKakaoAccount(getActivity(),callback);
         }
     }
+
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
         @Override
         public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
