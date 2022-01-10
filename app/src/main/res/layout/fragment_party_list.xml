@@ -13,21 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+        <Button
+            android:id="@+id/button_create"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
-            android:backgroundTint="#00FFFFFF"
-            android:src="@drawable/floating_button"
-
-            app:backgroundTint="#00FFFFFF"
-            app:elevation="5dp"
-            app:fabSize="normal">
-
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/floating_button" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -51,8 +45,8 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="583dp"
+                android:layout_width="wrap_content"
+                android:layout_height="532dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/tab2_subbackground"
@@ -62,7 +56,12 @@
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/swiperefreshlayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="517dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:paddingBottom="50dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -86,6 +85,7 @@
                         tools:listitem="@layout/fragment_party" />
 
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
             </LinearLayout>
         </LinearLayout>
 

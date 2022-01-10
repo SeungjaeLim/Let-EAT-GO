@@ -107,7 +107,7 @@ public class PartyFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        fab = (FloatingActionButton) view.findViewById(R.id.fab_btn);
+        /*fab = (FloatingActionButton) view.findViewById(R.id.fab_btn);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +116,18 @@ public class PartyFragment extends Fragment {
                 startActivity(intent);
                 list.clear();
                 Show_All_Party();
+            }
+        });*/
+
+        Button createButton = view.findViewById(R.id.button_create);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),CreatePartyActivity.class);
+                startActivity(intent);
+                list.clear();
+                Show_All_Party();
+
             }
         });
         Show_All_Party();

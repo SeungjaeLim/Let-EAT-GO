@@ -31,8 +31,8 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_menu_crawling.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_party.xml" value="0.19479166666666667" />
-        <entry key="app/src/main/res/layout/fragment_party_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_party.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_party_list.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
         <entry key="app/src/main/res/layout/menuitem.xml" value="0.25" />
         <entry key="app/src/main/res/layout/nav_header_beforelogin.xml" value="0.17916666666666667" />
