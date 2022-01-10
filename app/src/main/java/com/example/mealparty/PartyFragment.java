@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,7 +61,7 @@ public class PartyFragment extends Fragment {
     private static final String TAG = "MAIN";
     static ArrayList<Party_Item> list = new ArrayList<>();
     static MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(list);
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -95,8 +96,20 @@ public class PartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_party_list, container, false);
         // Set the adapter
+        swipeRefreshLayout = view.findViewById(R.id.swiperefreshlayout);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                System.out.println("refresh");
+                list.clear();
+                Show_All_Party();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         Show_All_Party();
         ct = getActivity();
+
         System.out.println(list);
         RecyclerView recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
