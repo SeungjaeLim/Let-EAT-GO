@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,7 +61,7 @@ public class PartyFragment extends Fragment {
     private static final String TAG = "MAIN";
     static ArrayList<Party_Item> list = new ArrayList<>();
     static MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(list);
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -95,8 +96,20 @@ public class PartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_party_list, container, false);
         // Set the adapter
+        swipeRefreshLayout = view.findViewById(R.id.swiperefreshlayout);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                System.out.println("refresh");
+                list.clear();
+                Show_All_Party();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         Show_All_Party();
         ct = getActivity();
+
         System.out.println(list);
         RecyclerView recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -186,45 +199,6 @@ public class PartyFragment extends Fragment {
         request.setShouldCache(false);
         requestQueue.add(request);
         System.out.println("Send Request");
-    }
-
-    public void Create_Party(String category, String name, int maxjoin, String time)
-    {
-        String url = "http://192.249.18.138:80";
-        url = url + "/api/partys/create/"+userid+"/"+category+"/"+name+"/"+maxjoin+"/"+time;
-        System.out.println(url);
-
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onResponse(String response) {
-                System.out.println(response);
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    jidList.add(jsonObject.getString("id"));
-                    jidcnt++;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        }
-        ){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String,String>();
-                return params;
-            }
-        };
-        request.setTag(TAG);
-        request.setShouldCache(false);
-        requestQueue.add(request);
-        System.out.println("Send Request Create");
     }
 
     public static void Participate_Party(String jobid)
