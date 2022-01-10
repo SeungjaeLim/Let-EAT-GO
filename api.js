@@ -97,18 +97,18 @@ app.get('/api/users/:id/:nickname', (req, res) => {
       if(!parseInt(existSTR[12]))
       {
         console.log('No exist');
-        connection.query('INSERT INTO Users (id,nickname) VALUES (\''+id+'\', \''+nickname+ '\');', (error, ins_res) => {
+        connection.query('INSERT INTO Users (id,nickname,count) VALUES (\''+id+'\', \''+nickname+ '\',0);', (error, ins_res) => {
           if (error) throw error;
+            connection.query('select * from Users where id='+id,(error, results) => {
+            if (error) throw error;
+            res.send(JSON.stringify(results));
+      });
         });
       }
       else
       {
         console.log('exist');
       }
-      connection.query('select * from Users where id='+id,(error, results) => {
-        if (error) throw error;
-        res.send(JSON.stringify(results));
-      });
     });
   }
 });
@@ -153,6 +153,11 @@ app.get('/api/partys/create/:userid/:category/:name/:maxjoin/:time', (req, res) 
         if (error) throw error;
         console.log('Create :', results);
         res.send(JSON.stringify(results));
+        let sql_count_inc = 'UPDATE Users set count = count + 1 where id = ' + userid;
+        connection.query(sql_count_inc, (error, resultcnt, fieldcnt) =>{
+          if (error) throw error;
+          console.log("inc success");
+        });
       });
     });
   });
@@ -190,6 +195,11 @@ app.get('/api/partys/participate/:userid/:jobid', (req, res) => {
             if (error) throw error;
             console.log('Participate :', iresults);
             res.send(JSON.stringify(iresults));
+            let sql_count_inc = 'UPDATE Users set count = count + 1 where id = ' + userid;
+            connection.query(sql_count_inc, (error, resultcnt, fieldcnt) =>{
+              if (error) throw error;
+              console.log("inc success");
+            });
           });
         }); 
       });
@@ -199,23 +209,73 @@ app.get('/api/partys/participate/:userid/:jobid', (req, res) => {
 
 app.get('/api/partys/delete/:userid/:jobid', (req, res) => {
   let {userid, jobid} = req.params;
-  let sql_party_delete = 'DELETE FROM Partys where id=? AND host=?';
-  let params_party_delete = [jobid, userid];
-  connection.query(sql_party_delete, params_party_delete, (err, result) =>
-  {
-    if (err) throw err;
-    let del_cnt = result.affectedRows;
-    if(del_cnt == 0)
-    {
-      console.log("Delete Failed");
-      res.send("Delete Failed");  
-    }
-    else
-    {
-      console.log("Delete Successed");
-      res.send("Delete Successed");  
-    }
-  })
+  let sql_party_all = 'SELECT * from Partys WHERE id = ' + jobid; 
+    connection.query(sql_party_all, (error, results) => {
+      if (error) throw error;
+      console.log('All Partys info is: ', results);
+      let joined = results[0].Joined;
+      let part1, part2, part3;
+      let sql_party_delete = 'DELETE FROM Partys where id=? AND host=?';
+      let params_party_delete = [jobid, userid];
+      connection.query(sql_party_delete, params_party_delete, (err, result) =>
+      {
+        if (err) throw err;
+        let del_cnt = result.affectedRows;
+        if(del_cnt == 0)
+        {
+          console.log("Delete Failed");
+          res.send("Delete Failed");  
+        }
+        else
+        {
+          console.log("Delete Successed");
+          console.log('joined : ' + joined);
+          res.send("Delete Successed");
+          if(joined == 1)
+          {
+            let sql_count_dec = 'UPDATE Users set count = count - 1 where id = ' + userid;
+            connection.query(sql_count_dec, (error, resultcnt, fieldcnt) =>{
+              if (error) throw error;
+              console.log("dec success");
+            });
+          }
+          else if(joined == 2)
+          {
+            part1 = results[0].Participant1;
+            let sql_count_dec = 'UPDATE Users set count = count - 1 where id = ? or id = ?';
+            let params_count_dec = [userid, part1];
+            connection.query(sql_count_dec, params_count_dec,(error, resultcnt, fieldcnt) =>{
+              if (error) throw error;
+              console.log("dec success");
+            });
+
+          }
+          else if(joined == 3)
+          {
+            part1 = results[0].Participant1;
+            part2 = results[0].Participant2;
+            let sql_count_dec = 'UPDATE Users set count = count - 1 where id = ? or id = ? or id = ?';
+            let params_count_dec = [userid, part1, part2];
+            connection.query(sql_count_dec, params_count_dec,(error, resultcnt, fieldcnt) =>{
+              if (error) throw error;
+              console.log("dec success");
+            });
+          }
+          else if(joined == 4)
+          {
+            part1 = results[0].Participant1;
+            part2 = results[0].Participant2;
+            part3 = results[0].Participant3;
+            let sql_count_dec = 'UPDATE Users set count = count - 1 where id = ? or id = ? or id = ? or id = ?';
+            let params_count_dec = [userid, part1, part2, part3];
+            connection.query(sql_count_dec, params_count_dec,(error, resultcnt, fieldcnt) =>{
+              if (error) throw error;
+              console.log("dec success");
+            });
+          }  
+        }
+      })
+    });
   // userid가 host인 경우 jobid 삭제
 });
 
@@ -282,6 +342,11 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
               if (err) throw err;
               console.log("2/n -> 2 resign");
               res.send("Resign Successed");
+              let sql_count_dec = 'UPDATE Users set count = count - 1 where id = ' + userid;
+              connection.query(sql_count_dec, (error, resultcnt, fieldcnt) =>{
+                if (error) throw error;
+                console.log("dec success");
+              });
             });
           }
           else if(results[0].Joined == 3)
@@ -296,6 +361,11 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
                 if (err) throw err;
                 console.log("3/n -> 2 resign");
                 res.send("Resign Successed");
+                let sql_count_dec = 'UPDATE Users set count = count - 1 where id = ' + userid;
+                connection.query(sql_count_dec, (error, resultcnt, fieldcnt) =>{
+                  if (error) throw error;
+                  console.log("dec success");
+                });
               });
             }
             if(resign_idx == 2)
@@ -308,6 +378,11 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
                 if (err) throw err;
                 console.log("3/n -> 3 resign");
                 res.send("Resign Successed");
+                let sql_count_dec = 'UPDATE Users set count = count - 1 where id = ' + userid;
+                connection.query(sql_count_dec, (error, resultcnt, fieldcnt) =>{
+                  if (error) throw error;
+                  console.log("dec success");
+                });
               });
             }
           }  
@@ -325,6 +400,11 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
                 if (err) throw err;
                 console.log("4/n -> 2 resign");
                 res.send("Resign Successed");
+                let sql_count_dec = 'UPDATE Users set count = count - 1 where id = ' + userid;
+                connection.query(sql_count_dec, (error, resultcnt, fieldcnt) =>{
+                  if (error) throw error;
+                  console.log("dec success");
+                });
               });
             }
             if(resign_idx == 2)
@@ -339,6 +419,11 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
                 if (err) throw err;
                 console.log("4/n -> 3 resign");
                 res.send("Resign Successed");
+                let sql_count_dec = 'UPDATE Users set count = count - 1 where id = ' + userid;
+                connection.query(sql_count_dec, (error, resultcnt, fieldcnt) =>{
+                  if (error) throw error;
+                  console.log("dec success");
+                });
               });
             }
             if(resign_idx == 3)
@@ -354,6 +439,11 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
                 if (err) throw err;
                 console.log("4/n -> 4 resign");
                 res.send("Resign Successed");
+                let sql_count_dec = 'UPDATE Users set count = count - 1 where id = ' + userid;
+                connection.query(sql_count_dec, (error, resultcnt, fieldcnt) =>{
+                  if (error) throw error;
+                  console.log("dec success");
+                });
               });
             }
           }    
