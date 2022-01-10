@@ -137,17 +137,23 @@ app.get('/api/mypage/participate/:userid', (req, res) => {
 app.get('/api/partys/create/:userid/:category/:name/:maxjoin/:time', (req, res) => {
   // param을 바탕으로 id를 create하고, host에 userid를 넣은 후 JSON으로 row 전달
   let {userid, category, name, maxjoin, time} = req.params;
+  let hostname;
   let jobid = create_jobID();
   //let datetime = time_formating(time);
-  let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host) VALUES(?,?,?,?,?,?,?)';
-  let params_party_create = [jobid, category, name, 1, parseInt(maxjoin), time, userid];
-  connection.query(sql_party_create, params_party_create, (err, result, fields) => {
-    if (err) throw err;
-    let sql_party_info = 'select * from Partys where id='+jobid;
-    connection.query(sql_party_info, (error, results, fields) => {
-      if (error) throw error;
-      console.log('Create :', results);
-      res.send(JSON.stringify(results));
+  connection.query('select * from Users where id='+userid,(error, nickresults) => {
+    if (error) throw error;
+    hostname = nickresults[0].nickname;
+    console.log(hostname);
+    let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, hostname) VALUES(?,?,?,?,?,?,?,?)';
+    let params_party_create = [jobid, category, name, 1, parseInt(maxjoin), time, userid, hostname];
+    connection.query(sql_party_create, params_party_create, (err, result, fields) => {
+      if (err) throw err;
+      let sql_party_info = 'select * from Partys where id='+jobid;
+      connection.query(sql_party_info, (error, results, fields) => {
+        if (error) throw error;
+        console.log('Create :', results);
+        res.send(JSON.stringify(results));
+      });
     });
   });
 });
@@ -170,18 +176,23 @@ app.get('/api/partys/participate/:userid/:jobid', (req, res) => {
     }
     else
     {
-      let sql_party_participate = 'UPDATE Partys SET Joined=?, Participant'+results[0].Joined+'=? WHERE id=?';
-      let params_party_participate = [results[0].Joined+1, userid, jobid];
-      connection.query(sql_party_participate, params_party_participate, (error, presults, fields) =>
-      {
-        if(error) throw error;
-        let sql_party_info = 'select * from Partys where id='+jobid;
-        connection.query(sql_party_info, (error, iresults, fields) => {
-          if (error) throw error;
-          console.log('Participate :', iresults);
-          res.send(JSON.stringify(iresults));
-        });
-      }); 
+      connection.query('select * from Users where id='+userid,(error, nickresults) => {
+        if (error) throw error;
+        hostname = nickresults[0].nickname;
+        console.log(hostname);
+        let sql_party_participate = 'UPDATE Partys SET Joined=?, Participant'+results[0].Joined+'=?, name'+results[0].Joined+'=? WHERE id=?';
+        let params_party_participate = [results[0].Joined+1, userid, hostname, jobid];
+        connection.query(sql_party_participate, params_party_participate, (error, presults, fields) =>
+        {
+          if(error) throw error;
+          let sql_party_info = 'select * from Partys where id='+jobid;
+          connection.query(sql_party_info, (error, iresults, fields) => {
+            if (error) throw error;
+            console.log('Participate :', iresults);
+            res.send(JSON.stringify(iresults));
+          });
+        }); 
+      });
     }
   })
 });
@@ -230,8 +241,11 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
       let new_MAXJoin = results[0].MAXjoin;
       let new_time = results[0].time;
       let new_hos = results[0].host;
+      let new_hostname = results[0].hostname;
       let new_Participant1;
       let new_Participant2;
+      let new_name1;
+      let new_name2;
       if(results[0].Participant1 == userid)
       {
         resign_idx = 1;
@@ -258,11 +272,12 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
         else
         {
           console.log("Delete Successed");
-          if(results[0].Joined == 1)
+          console.log(results[0].Joined);
+          if(results[0].Joined == 2)
           {
             //only query
-            let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host) VALUES(?,?,?,?,?,?,?)';
-            let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos];
+            let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, hostname) VALUES(?,?,?,?,?,?,?,?)';
+            let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_hostname];
             connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
               if (err) throw err;
               console.log("2/n -> 2 resign");
@@ -274,8 +289,9 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
             if(resign_idx == 1)
             {
               new_Participant1 = results[0].Participant2;
-              let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, Participant1) VALUES(?,?,?,?,?,?,?,?)';
-              let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_Participant1];
+              new_name1 = results[0].name2;
+              let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, hostname, Participant1, name1) VALUES(?,?,?,?,?,?,?,?,?,?)';
+              let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_hostname,new_Participant1, new_name1];
               connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
                 if (err) throw err;
                 console.log("3/n -> 2 resign");
@@ -285,8 +301,9 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
             if(resign_idx == 2)
             {
               new_Participant1 = results[0].Participant1;
-              let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, Participant1) VALUES(?,?,?,?,?,?,?,?)';
-              let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_Participant1];
+              new_name1 = results[0].name1;
+              let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, hostname, Participant1, name1) VALUES(?,?,?,?,?,?,?,?,?,?)';
+              let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_hostname, new_Participant1, new_name1];
               connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
                 if (err) throw err;
                 console.log("3/n -> 3 resign");
@@ -299,9 +316,11 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
             if(resign_idx == 1)
             {
               new_Participant1 = results[0].Participant3;
+              new_name1 = results[0].name3;
               new_Participant2 = results[0].Participant2;
-              let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, Participant1, Participant2) VALUES(?,?,?,?,?,?,?,?,?)';
-              let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_Participant1, new_Participant2];
+              new_name2 = results[0].name2;
+              let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, Participant1, Participant2, hostname, name1, name2) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)';
+              let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_Participant1, new_Participant2, new_hostname, new_name1, new_name2];
               connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
                 if (err) throw err;
                 console.log("4/n -> 2 resign");
@@ -311,9 +330,11 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
             if(resign_idx == 2)
             {
               new_Participant1 = results[0].Participant1;
+              new_name1 = results[0].name1;
               new_Participant2 = results[0].Participant3;
-              let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, Participant1, Participant2) VALUES(?,?,?,?,?,?,?,?,?)';
-              let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_Participant1, new_Participant2];
+              new_name2 = results[0].name3;
+              let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, Participant1, Participant2, hostname, name1, name2) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)';
+              let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_Participant1, new_Participant2, new_hostname, new_name1, new_name2];
               connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
                 if (err) throw err;
                 console.log("4/n -> 3 resign");
@@ -324,9 +345,11 @@ app.get('/api/partys/resign/:userid/:jobid', (req, res) => {
             {
               //only query
               new_Participant1 = results[0].Participant1;
+              new_name1 = results[0].name1;
               new_Participant2 = results[0].Participant2;
-              let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, Participant1, Participant2) VALUES(?,?,?,?,?,?,?,?,?)';
-              let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_Participant1, new_Participant2];
+              new_name2 = results[0].name2;
+              let sql_party_create = 'INSERT INTO Partys (id, Category, Name, Joined, MAXJoin, time, host, Participant1, Participant2, hostname, name1, name2) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)';
+              let params_party_create = [new_id, new_Category, new_Name, new_Joined, new_MAXJoin, new_time, new_hos, new_Participant1, new_Participant2, new_hostname, new_name1, new_name2];
               connection.query(sql_party_create, params_party_create, (err, resultc, fields) => {
                 if (err) throw err;
                 console.log("4/n -> 4 resign");
