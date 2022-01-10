@@ -47,6 +47,23 @@ app.get('/debug/time/:time', (req, res) => {
   res.send(datetime);
 });
 
+app.get('/debug/currenttime', (req, res) => {
+  const curr = new Date();
+  const utc = curr.getTime() + (curr.getTimezoneOffset()*60*1000);
+  const KR_TIME_DIFF = 9*60*60*1000;
+  const today = new Date(utc + KR_TIME_DIFF);
+  
+  let year = today.getFullYear(); // 년도
+  let month = today.getMonth() + 1;  // 월
+  let date = today.getDate();  // 날짜
+  let hours = today.getHours(); // 시
+  let minutes = today.getMinutes();  // 분
+  let seconds = today.getSeconds();  // 초
+  let servertime = '' + year + month + date + hours + minutes + seconds;
+
+  res.send(servertime);
+});
+
 app.get('/api/users/:id', (req, res) => {
   let {id} = req.params;
   if(id == 'all')
@@ -328,7 +345,35 @@ app.get('/api/partys/show/:jobid', (req, res) => {
   // jobid의 정보 보기
   if(jobid == 'all')
   {
-    let sql_party_all = 'SELECT * from Partys ORDER BY time ASC';
+    const curr = new Date();
+    const utc = curr.getTime() + (curr.getTimezoneOffset()*60*1000);
+    const KR_TIME_DIFF = 9*60*60*1000;
+    const today = new Date(utc + KR_TIME_DIFF);
+    
+    let year = today.getFullYear(); // 년도
+    let month = today.getMonth() + 1;  // 월
+    let date = today.getDate();  // 날짜
+    let _year, _month, _date;
+    _year = year;
+    if(month<10)
+    {
+      _month = '0'+month;
+    }
+    else
+    {
+      _month = month;
+    }
+    if(date<10)
+    {
+      _date = '0'+date;
+    }
+    else
+    {
+      _date = date;
+    }
+    let servertime = _year +'-'+ _month +'-'+ _date;
+    console.log(servertime);
+    let sql_party_all = 'SELECT * from Partys WHERE DATE(time) BETWEEN \'' + servertime + '\' AND' +'\'2099-01-23\''; /*+' ORDER BY time ASC';*/
     connection.query(sql_party_all, (error, results) => {
       if (error) throw error;
       console.log('All Partys info is: ', results);
@@ -344,6 +389,16 @@ app.get('/api/partys/show/:jobid', (req, res) => {
       res.send(JSON.stringify(results));
     });
   }
+});
+
+app.get('/api/partys/present', (req, res) => {
+  // jobid의 정보 보기
+    let sql_party_all = 'SELECT * from Partys ORDER BY time ASC';
+    connection.query(sql_party_all, (error, results) => {
+      if (error) throw error;
+      console.log('All Partys info is: ', results);
+      res.send(JSON.stringify(results));
+    });
 });
 
 app.get('/api/partys/category/:category', (req, res) => {
