@@ -170,6 +170,8 @@ public class CreatePartyActivity extends AppCompatActivity {
                 System.out.println(MAXjoin);
                 System.out.println(jTime);
                 Create_Party(jCategory, jName, MAXjoin, jTime);
+                PartyFragment.list.clear();
+                PartyFragment.Show_All_Party();
                 onBackPressed();
             }
         });
