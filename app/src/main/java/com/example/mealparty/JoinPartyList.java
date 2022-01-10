@@ -60,7 +60,7 @@ public class JoinPartyList extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        //actionBar.hide();
     }
 
     public static void Show_All_Party()

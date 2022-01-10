@@ -71,7 +71,7 @@ public class CreatePartyActivity extends AppCompatActivity {
         seekbar = (SeekBar) findViewById(R.id.seekBar);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        //actionBar.hide();
 
         String[] categoryItem = new String[]{"카이스트","어은동","궁동","둔산동","기타"};
         Spinner category = (Spinner) findViewById(R.id.spinner);

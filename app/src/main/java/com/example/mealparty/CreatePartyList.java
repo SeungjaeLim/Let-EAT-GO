@@ -58,7 +58,7 @@ public class CreatePartyList extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.Cpartylist);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        //actionBar.hide();
 
 
         recyclerView.setAdapter(adapter);
