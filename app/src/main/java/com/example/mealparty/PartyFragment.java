@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mealparty.placeholder.PlaceholderContent;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 
@@ -55,13 +56,12 @@ public class PartyFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     public static RequestQueue requestQueue;
-    ArrayList jidList = new ArrayList();
-    int jidcnt = 0;
     static Context ct;
     private static final String TAG = "MAIN";
     static ArrayList<Party_Item> list = new ArrayList<>();
     static MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(list);
     private SwipeRefreshLayout swipeRefreshLayout;
+    FloatingActionButton fab;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -107,6 +107,17 @@ public class PartyFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+        fab = (FloatingActionButton) view.findViewById(R.id.fab_btn);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),CreatePartyActivity.class);
+                startActivity(intent);
+                list.clear();
+                Show_All_Party();
+            }
+        });
         Show_All_Party();
         ct = getActivity();
 
@@ -117,16 +128,6 @@ public class PartyFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         updateKakaoLoginUi();
 
-        //create button
-        Button partyCreateButton = (Button) view.findViewById(R.id.create_button);
-        partyCreateButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(getActivity(),CreatePartyActivity.class);
-                startActivity(intent);
-            }
-
-        });
         return view;
     }
 

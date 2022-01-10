@@ -6,22 +6,32 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".CreatePartyList">
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/Cpartylist"
-    android:name="com.example.mealparty.Activity_Create_Party_List"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/cre_swiperefreshlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:context=".CreatePartyList"
+        tools:layout_editor_absoluteY="25dp">
 
-    android:layout_marginTop="116dp"
-    android:layout_marginEnd="8dp"
-    app:layoutManager="LinearLayoutManager"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:listitem="@layout/fragment_party" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Cpartylist"
+            android:name="com.example.mealparty.Activity_Create_Party_List"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
 
+            android:layout_marginTop="116dp"
+            android:layout_marginEnd="8dp"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/fragment_party" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

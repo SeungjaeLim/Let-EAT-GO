@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -43,7 +44,7 @@ public class CreatePartyList extends AppCompatActivity {
     private static final String TAG = "MAIN";
     static ArrayList<Party_Item> list = new ArrayList<>();
     static CreatePartyListRecyclerViewAdapter adapter = new CreatePartyListRecyclerViewAdapter(list);
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,19 @@ public class CreatePartyList extends AppCompatActivity {
         {
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
+        swipeRefreshLayout = findViewById(R.id.cre_swiperefreshlayout);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                System.out.println("refresh create");
+                list.clear();
+                System.out.println("CLEAR LIST" + list);
+                Show_All_Party();
+                System.out.println("UPDATE LIST" + list);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         ct = this;
         updateKakaoLoginUi();
         System.out.println(list);
