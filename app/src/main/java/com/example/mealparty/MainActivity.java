@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.PorterDuff;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -28,6 +29,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -149,6 +151,28 @@ public class MainActivity extends AppCompatActivity {
 
         //
         TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+           @Override
+           public void onTabSelected(TabLayout.Tab tab) {
+               int tabIconColor = ContextCompat.getColor(MainActivity.this, R.color.tabSelectedIconColor);
+               tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+
+
+           }
+
+           @Override
+           public void onTabUnselected(TabLayout.Tab tab) {
+               int tabIconColor = ContextCompat.getColor(MainActivity.this, R.color.white);
+               tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+
+           }
+
+           @Override
+           public void onTabReselected(TabLayout.Tab tab) {
+
+           }
+       }
+        );
         viewPager2 = (ViewPager2) findViewById(R.id.viewPager2);
         pageAdapter = new PageAdapter(this, fragments);
         viewPager2.setAdapter(pageAdapter);
@@ -156,9 +180,21 @@ public class MainActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy(){
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position){
-                TextView textView = new TextView(MainActivity.this);
-                textView.setText(tabElement.get(position));
-                tab.setCustomView(textView);
+                switch(position){
+                    case 0:
+                        tab.setIcon(R.drawable.icon_tab1);
+                        break;
+                    case 1:
+                        tab.setIcon(R.drawable.icon_tab2);
+                        break;
+                    case 2:
+                        tab.setIcon(R.drawable.icon_tab3);
+                        break;
+                }
+                //tab.setIcon(R.drawable.ic_baseline_menu_24);
+                //TextView textView = new TextView(MainActivity.this);
+                //textView.setText(tabElement.get(position));
+                //tab.setCustomView(textView);
             }
         }).attach();
 
@@ -298,12 +334,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
+    }*/
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState){
