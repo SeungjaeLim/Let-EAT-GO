@@ -55,8 +55,6 @@ public class PartyFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     public static RequestQueue requestQueue;
-    ArrayList jidList = new ArrayList();
-    int jidcnt = 0;
     static Context ct;
     private static final String TAG = "MAIN";
     static ArrayList<Party_Item> list = new ArrayList<>();
