@@ -34,19 +34,70 @@ public class JoinPartyListRecyclerViewAdapter extends RecyclerView.Adapter<JoinP
                     {
                         Party_Item pitem = mData.get(pos);
                         System.out.println("Clicked Jobid : " + pitem.jobid);
-                        new AlertDialog.Builder(context)
-                                .setTitle(pitem.time+ " " + pitem.name)
-                                .setMessage("탈퇴하시겠습니까?")
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        // 확인시 처리 로직
-                                        JoinPartyList.Resign_Party(pitem.jobid);
-                                    }})
-                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        // 취소시 처리 로직
-                                    }})
-                                .show();
+                        if(pitem.joined == 1)
+                        {
+                            new AlertDialog.Builder(context)
+                                    .setTitle("Resign " + pitem.name+"?")
+                                    .setMessage(pitem.hostname +" 참여 중")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            // 확인시 처리 로직
+                                            JoinPartyList.Resign_Party(pitem.jobid);
+                                        }})
+                                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            // 취소시 처리 로직
+                                        }})
+                                    .show();
+                        }
+                        else if(pitem.joined == 2)
+                        {
+                            new AlertDialog.Builder(context)
+                                    .setTitle("Resign " + pitem.name+"?")
+                                    .setMessage(pitem.hostname +", "+ pitem.name1+ " 참여 중")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            // 확인시 처리 로직
+                                            JoinPartyList.Resign_Party(pitem.jobid);
+                                        }})
+                                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            // 취소시 처리 로직
+                                        }})
+                                    .show();
+                        }
+                        else if(pitem.joined == 3)
+                        {
+                            new AlertDialog.Builder(context)
+                                    .setTitle("Resign " + pitem.name+"?")
+                                    .setMessage(pitem.hostname +", "+ pitem.name1+", " + pitem.name2+ " 참여 중")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            // 확인시 처리 로직
+                                            JoinPartyList.Resign_Party(pitem.jobid);
+                                        }})
+                                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            // 취소시 처리 로직
+                                        }})
+                                    .show();
+                        }
+                        else if(pitem.joined == 4)
+                        {
+                            new AlertDialog.Builder(context)
+                                    .setTitle("Resign " + pitem.name+"?")
+                                    .setMessage(pitem.hostname +", "+ pitem.name1+", " + pitem.name2 +", "+ pitem.name3 + " 참여 중")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            // 확인시 처리 로직
+                                            JoinPartyList.Resign_Party(pitem.jobid);
+                                        }})
+                                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            // 취소시 처리 로직
+                                        }})
+                                    .show();
+                        }
                     }
                 }
             });

@@ -84,7 +84,6 @@ public class JoinPartyList extends AppCompatActivity {
         url = url + "/api/mypage/participate/"+userid;
         list.clear();
 
-        Map<String, ArrayList> partyMap = new HashMap<>();
         ArrayList idList = new ArrayList();
         ArrayList CategoryList = new ArrayList();
         ArrayList NameList = new ArrayList();
@@ -92,6 +91,10 @@ public class JoinPartyList extends AppCompatActivity {
         ArrayList MAXjoinList = new ArrayList();
         ArrayList timeList = new ArrayList();
         ArrayList hostList = new ArrayList();
+        ArrayList hostnameList = new ArrayList();
+        ArrayList name1List = new ArrayList();
+        ArrayList name2List = new ArrayList();
+        ArrayList name3List = new ArrayList();
 
         System.out.println(url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -111,19 +114,38 @@ public class JoinPartyList extends AppCompatActivity {
                         MAXjoinList.add(jsonArray.getJSONObject(i).getInt("MAXjoin"));
                         timeList.add(jsonArray.getJSONObject(i).getString("time"));
                         hostList.add(jsonArray.getJSONObject(i).getString("host"));
+                        hostnameList.add(jsonArray.getJSONObject(i).getString("hostname"));
+                        if((int) JoinedList.get(i) == 1)
+                        {
+                            name1List.add("foo");
+                            name2List.add("foo");
+                            name3List.add("foo");
+                        }
+                        else if((int) JoinedList.get(i) == 2)
+                        {
+                            name1List.add(jsonArray.getJSONObject(i).getString("name1"));
+                            name2List.add("foo");
+                            name3List.add("foo");
+                        }
+                        else if((int) JoinedList.get(i) == 3)
+                        {
+                            name1List.add(jsonArray.getJSONObject(i).getString("name1"));
+                            name2List.add(jsonArray.getJSONObject(i).getString("name2"));
+                            name3List.add("foo");
+                        }
+                        else if((int) JoinedList.get(i) == 4)
+                        {
+                            name1List.add(jsonArray.getJSONObject(i).getString("name1"));
+                            name2List.add(jsonArray.getJSONObject(i).getString("name2"));
+                            name3List.add(jsonArray.getJSONObject(i).getString("name3"));
+                        }
+
                         String date_ = timeList.get(i).toString().substring(5,10);
                         String time_ = timeList.get(i).toString().substring(11,16);
                         String formated_time = date_.substring(0,2) + "월 " + date_.substring(3,5) + "일 " + time_.substring(0,2) + "시 " + time_.substring(3,5)+ "분";
-                        Party_Item partyelem = new Party_Item(JoinedList.get(i) + "/" + MAXjoinList.get(i),formated_time,NameList.get(i).toString(), idList.get(i).toString());
+                        Party_Item partyelem = new Party_Item(JoinedList.get(i) + "/" + MAXjoinList.get(i),formated_time,NameList.get(i).toString(), idList.get(i).toString(), (int) JoinedList.get(i), hostnameList.get(i).toString(), name1List.get(i).toString(), name2List.get(i).toString(), name3List.get(i).toString());
                         list.add(partyelem);
                     }
-                    partyMap.put("id",idList);
-                    partyMap.put("Category",CategoryList);
-                    partyMap.put("Name",NameList);
-                    partyMap.put("Join",JoinedList);
-                    partyMap.put("MAXjoin",MAXjoinList);
-                    partyMap.put("time",timeList);
-                    partyMap.put("host",hostList);
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e){
                     e.printStackTrace();
