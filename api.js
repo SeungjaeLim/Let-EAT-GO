@@ -108,6 +108,10 @@ app.get('/api/users/:id/:nickname', (req, res) => {
       else
       {
         console.log('exist');
+        connection.query('select * from Users where id='+id,(error, results) => {
+          if (error) throw error;
+          res.send(JSON.stringify(results));
+      });
       }
     });
   }
