@@ -28,6 +28,10 @@ import com.google.android.material.transition.FadeThroughProvider;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +50,7 @@ public class AfterLoginFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    String userid;
     public AfterLoginFragment() {
         // Required empty public constructor
     }
@@ -83,6 +87,7 @@ public class AfterLoginFragment extends Fragment {
     }
 
     View rootView;
+    TextView countView;
     //TextView nickname;
 
     @Override
@@ -90,6 +95,7 @@ public class AfterLoginFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         rootView =inflater.inflate(R.layout.fragment_after_login, container, false);
+        countView = rootView.findViewById(R.id.countText);
 
         Button logoutButton = (Button) rootView.findViewById(R.id.button_logout);
         logoutButton.setOnClickListener(new View.OnClickListener(){
@@ -130,7 +136,6 @@ public class AfterLoginFragment extends Fragment {
 
 
         updateKakaoLoginUi();
-
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -145,7 +150,7 @@ public class AfterLoginFragment extends Fragment {
                     Log.i(TAG, "id" + user.getId());
                     Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "userimage" + user.getKakaoAccount().getProfile().getProfileImageUrl());
-
+                    userid = "" + user.getId();
                     TextView nickname= rootView.findViewById(R.id.user_nickname);
                     String Nickname = user.getKakaoAccount().getProfile().getNickname();
                     nickname.setText(Nickname);
@@ -159,7 +164,7 @@ public class AfterLoginFragment extends Fragment {
                         @Override
                         public void onResponse(String response) {
                             System.out.println(response);
-
+                            Show_count();
                         }
                     }, new Response.ErrorListener() {
                         @Override
@@ -190,6 +195,42 @@ public class AfterLoginFragment extends Fragment {
         });
     }
 
+    public void Show_count()
+    {
+        System.out.println("SHOWCOUNT");
+        String url = "http://192.249.18.138:80";
+        url = url + "/api/users/"+userid+"/a";
+        System.out.println(url);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    String countSTR = "" + jsonArray.getJSONObject(0).getInt("count");
+                    countView.setText(countSTR);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String,String>();
+                return params;
+            }
+        };
+        request.setTag(TAG);
+        request.setShouldCache(false);
+        requestQueue.add(request);
+        System.out.println("Send Request Participate");
+    }
     private final static String TAG = "유저";
 }

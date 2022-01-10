@@ -38,6 +38,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/countText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
                 android:id="@+id/user_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
