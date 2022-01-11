@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -42,6 +43,7 @@ public class MenuCrawling extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    TextView textView;
 
     //
 
@@ -106,6 +108,21 @@ public class MenuCrawling extends Fragment implements View.OnClickListener {
         button_kama.setOnClickListener(this);
         button_west.setOnClickListener(this);
         button_east.setOnClickListener(this);*/
+        textView = rootView.findViewById(R.id.Hitext);
+        Date dt = new Date();
+        int hours = dt.getHours();
+        int min = dt.getMinutes();
+        System.out.println("time:" + hours);
+
+        if(hours>=4 || hours<12){
+            textView.setText("좋은 아침이네요.\n아침은 드셨나요?");
+        }else if(hours>=12 || hours<16){
+            textView.setText("좋은 점심이에요.\n학식을 확인해 보세요.");
+        }else if(hours>=16 || hours<=21){
+            textView.setText("좋은 저녁이네요.\n저녁은 외식 어떨까요?");
+        }else if(hours>=21 || hours<4){
+            textView.setText("좋은 밤이네요.\n야식 드실래요?");
+        }
 
         Button button_kama = (Button) rootView.findViewById(R.id.button_kama);
         Button button_west = (Button) rootView.findViewById(R.id.button_west);
