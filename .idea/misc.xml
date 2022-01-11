@@ -3,27 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/activity_create_party.xml" value="0.1296875" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/activity_create_party_list.xml" value="0.25364583333333335" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/activity_join_party_list.xml" value="0.1296875" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/after_login.xml" value="0.2" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/content_main.xml" value="0.13958333333333334" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/dialog.xml" value="0.264" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/dialog_background_round.xml" value="0.1796875" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/fragment_after_login.xml" value="0.4" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/fragment_gallery.xml" value="0.13958333333333334" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/fragment_home.xml" value="0.13958333333333334" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/fragment_menu_crawling.xml" value="0.264" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/fragment_my_page.xml" value="0.20520833333333333" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/fragment_party.xml" value="0.264" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/fragment_party_list.xml" value="0.264" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/fragment_slideshow.xml" value="0.13958333333333334" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/menuitem.xml" value="0.13958333333333334" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/nav_header_beforelogin.xml" value="0.13958333333333334" />
-        <entry key="..\:/CS496_week2/app/src/main/res/layout/nav_header_main.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3490740740740741" />
         <entry key="app/src/main/res/drawable/button_picnk.xml" value="0.2037037037037037" />
         <entry key="app/src/main/res/drawable/button_pink.xml" value="0.11822916666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.19166666666666668" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3490740740740741" />
         <entry key="app/src/main/res/drawable/ic_menu_camera.xml" value="0.23148148148148148" />
         <entry key="app/src/main/res/drawable/ic_menu_gallery.xml" value="0.2037037037037037" />
@@ -35,28 +18,26 @@
         <entry key="app/src/main/res/layout-w936dp/activity_create_party.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_create_party.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_create_party_list.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_create_party_list.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_join_party_list.xml" value="0.1413373860182371" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.10030395136778116" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_popup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/after_login.xml" value="0.16" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog.xml" value="0.1358695652173913" />
-        <entry key="app/src/main/res/layout/fragment_after_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_after_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_menu_crawling.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_party.xml" value="0.19479166666666667" />
-        <entry key="app/src/main/res/layout/fragment_party_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_party.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_party_list.xml" value="0.43380614657210403" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
         <entry key="app/src/main/res/layout/menuitem.xml" value="0.22" />
         <entry key="app/src/main/res/layout/nav_header_beforelogin.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/spinneritem.xml" value="0.1" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
         <entry key="app/src/main/res/menu/main.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.23148148148148148" />
