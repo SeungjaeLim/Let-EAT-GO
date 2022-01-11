@@ -38,7 +38,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         if(pitem.joined == 1)
                         {
                             new AlertDialog.Builder(context)
-                                    .setTitle("Join " + pitem.name+"?")
+                                    .setTitle(pitem.name+" 참여하시겠습니까 ?")
                                     .setMessage(pitem.hostname +" 참여 중")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int whichButton) {
@@ -54,7 +54,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         else if(pitem.joined == 2)
                         {
                             new AlertDialog.Builder(context)
-                                    .setTitle("Join " + pitem.name+"?")
+                                    .setTitle(pitem.name+" 참여하시겠습니까 ?")
                                     .setMessage(pitem.hostname +", "+ pitem.name1+ " 참여 중")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int whichButton) {
@@ -70,7 +70,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         else if(pitem.joined == 3)
                         {
                             new AlertDialog.Builder(context)
-                                    .setTitle("Join " + pitem.name+"?")
+                                    .setTitle(pitem.name+" 참여하시겠습니까 ?")
                                     .setMessage(pitem.hostname +", "+ pitem.name1+", " + pitem.name2+ " 참여 중")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int whichButton) {
@@ -86,7 +86,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         else if(pitem.joined == 4)
                         {
                             new AlertDialog.Builder(context)
-                                    .setTitle("Join " + pitem.name+"?")
+                                    .setTitle(pitem.name+" 참여하시겠습니까 ?")
                                     .setMessage(pitem.hostname +", "+ pitem.name1+", " + pitem.name2 +", "+ pitem.name3 + " 참여 중")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int whichButton) {

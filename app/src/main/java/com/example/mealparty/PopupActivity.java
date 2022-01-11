@@ -119,21 +119,21 @@ public class PopupActivity extends AppCompatActivity {
                 switch(place){
                     case 0:
                         fragments.clear();
-                        fragments.add(MealItem.newInstance(MenuList.getKama_lunch()));
-                        fragments.add(MealItem.newInstance(MenuList.getKama_dinner()));
+                        fragments.add(MealItem.newInstance(MenuList.getKama_lunch(),1));
+                        fragments.add(MealItem.newInstance(MenuList.getKama_dinner(),2));
 
                         break;
                     case 1:
                         fragments.clear();
-                        fragments.add(MealItem.newInstance(MenuList.getWest_breakfast()));
-                        fragments.add(MealItem.newInstance(MenuList.getWest_lunch()));
-                        fragments.add(MealItem.newInstance(MenuList.getWest_dinner()));
+                        fragments.add(MealItem.newInstance(MenuList.getWest_breakfast(),0));
+                        fragments.add(MealItem.newInstance(MenuList.getWest_lunch(),1));
+                        fragments.add(MealItem.newInstance(MenuList.getWest_dinner(),2));
                         break;
                     case 2:
                         fragments.clear();
-                        fragments.add(MealItem.newInstance(MenuList.getEast_breakfast()));
-                        fragments.add(MealItem.newInstance(MenuList.getEast_lunch()));
-                        fragments.add(MealItem.newInstance(MenuList.getEast_dinner()));
+                        fragments.add(MealItem.newInstance(MenuList.getEast_breakfast(),0));
+                        fragments.add(MealItem.newInstance(MenuList.getEast_lunch(),1));
+                        fragments.add(MealItem.newInstance(MenuList.getEast_dinner(),2));
                         break;
                 }
 
@@ -174,20 +174,20 @@ public class PopupActivity extends AppCompatActivity {
         switch(place){
             case 0:
                 fragments.clear();
-                fragments.add(MealItem.newInstance(MenuList.getKama_lunch()));
-                fragments.add(MealItem.newInstance(MenuList.getKama_dinner()));
+                fragments.add(MealItem.newInstance(MenuList.getKama_lunch(),1));
+                fragments.add(MealItem.newInstance(MenuList.getKama_dinner(),2));
                 break;
             case 1:
                 fragments.clear();
-                fragments.add(MealItem.newInstance(MenuList.getWest_breakfast()));
-                fragments.add(MealItem.newInstance(MenuList.getWest_lunch()));
-                fragments.add(MealItem.newInstance(MenuList.getWest_dinner()));
+                fragments.add(MealItem.newInstance(MenuList.getWest_breakfast(),0));
+                fragments.add(MealItem.newInstance(MenuList.getWest_lunch(),1));
+                fragments.add(MealItem.newInstance(MenuList.getWest_dinner(),2));
                 break;
             case 2:
                 fragments.clear();
-                fragments.add(MealItem.newInstance(MenuList.getEast_breakfast()));
-                fragments.add(MealItem.newInstance(MenuList.getEast_lunch()));
-                fragments.add(MealItem.newInstance(MenuList.getEast_dinner()));
+                fragments.add(MealItem.newInstance(MenuList.getEast_breakfast(),0));
+                fragments.add(MealItem.newInstance(MenuList.getEast_lunch(),1));
+                fragments.add(MealItem.newInstance(MenuList.getEast_dinner(),2));
                 break;
         }
 

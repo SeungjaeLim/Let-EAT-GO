@@ -2,6 +2,7 @@ package com.example.mealparty;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -157,7 +158,10 @@ public class MenuCrawling extends Fragment implements View.OnClickListener {
         @Override
         protected void onPreExecute() {
             asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            asyncDialog.setMessage("로딩중입니다...");
+            asyncDialog.setCancelable(false);
+            asyncDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+            asyncDialog.setMessage("로딩 중...");
 
             // Show dialog
             asyncDialog.show();

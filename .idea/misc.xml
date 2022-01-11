@@ -17,9 +17,9 @@
         <entry key="app/src/main/res/layout-w1240dp/activity_create_party.xml" value="0.10140562248995984" />
         <entry key="app/src/main/res/layout-w936dp/activity_create_party.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_create_party.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_create_party_list.xml" value="0.1272644927536232" />
+        <entry key="app/src/main/res/layout/activity_create_party_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_join_party_list.xml" value="0.1413373860182371" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.10030395136778116" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_popup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/after_login.xml" value="0.16" />
@@ -29,12 +29,12 @@
         <entry key="app/src/main/res/layout/fragment_after_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_menu_crawling.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_menu_crawling.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_party.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_party_list.xml" value="0.440625" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/menuitem.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/menuitem.xml" value="0.22" />
         <entry key="app/src/main/res/layout/nav_header_beforelogin.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/spinneritem.xml" value="0.1" />
