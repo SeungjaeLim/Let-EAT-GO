@@ -11,14 +11,14 @@
 </p>
 
 <br/>
-<img src="https://user-images.githubusercontent.com/74184274/148008895-5a1ff8ec-9dfa-4667-abbe-2a9ec57b6edf.png" width="300" height="300">
+<img src="https://user-images.githubusercontent.com/74184274/148947164-7913af20-7262-4429-9bb8-2ccce84f7ea0.png" width="150" height="150">
 <br/>
 
 <br/>
 
 |학식 메뉴 확인|밥팟 탐색|마이페이지|
 |--|--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/148011164-2d5610b6-35ff-4d28-90e7-2ffe5bcf2859.jpg" width="225" height="400">|<img src = "https://user-images.githubusercontent.com/96764875/148022098-41489716-c8d7-4134-962b-9d08db74b76d.jpg" width = "225" height = "400">|<img src = "https://user-images.githubusercontent.com/74184274/148010914-d404b7ce-ea9a-4edd-b6e2-18a01a7dce90.jpg" width = "225" height = "400">| 
+|<img src="https://user-images.githubusercontent.com/74184274/148947325-882c67ad-2be2-4d43-ae63-9912968d91d0.jpg" width="190" height="400">|<img src = "https://user-images.githubusercontent.com/74184274/148947332-ab84385a-a924-4f19-b5fd-4dcf43e2b163.jpg" width = "190" height = "400">|<img src = "https://user-images.githubusercontent.com/74184274/148947340-f33daa24-7084-4a50-9130-0fbb7d15a241.jpg" width = "190" height = "400">| 
 
 <br/>
 
@@ -29,7 +29,7 @@
     
 |타이틀|로그인 화면|
 |--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/148015534-bbdce00e-97cf-465a-b12d-9a4f1696fef7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148015535-b0aae00c-62f5-41d5-a782-e0ac29cbe6a7.jpg" width="169" height="300">|  
+|<img src="https://user-images.githubusercontent.com/74184274/148947336-c326b09d-905d-402f-a2b0-492ebf20674e.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947339-5a73923c-d333-4326-a943-11b875f07b40.jpg" width="145" height="300">|  
    - `KakaoTalk Login SDK`를 사용하여 `DB` 에  `ID` 와  `name` 저장 
 <br/>
 
@@ -38,14 +38,14 @@
 ##  학식 메뉴 확인
 > "오늘도 학식 별로네..."
 ### 인삿말
-<img src="https://user-images.githubusercontent.com/74184274/148015534-bbdce00e-97cf-465a-b12d-9a4f1696fef7.jpg" width="169" height="300">
+<img src="https://user-images.githubusercontent.com/74184274/148947324-fa9a7042-7634-48e3-8502-7afcebac608d.jpg" width="145" height="300">
     
 - 현재 시간에 따라 알맞은 인삿말을 건내줍니다.
   - `Date` 클래스를 이용하여 현재 시간을 받아오고, 이를 바탕으로 `TextView`에 문구를 설정합니다.
 ### 메뉴 확인 탭
   |오늘 메뉴 확인|끼니별 메뉴 확인|금주 메뉴 확인|
 |--|--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/148015534-bbdce00e-97cf-465a-b12d-9a4f1696fef7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148015535-b0aae00c-62f5-41d5-a782-e0ac29cbe6a7.jpg" width="169" height="300">|<img src = "https://user-images.githubusercontent.com/74184274/148015538-e097451b-3c09-47c5-a918-fd9685ed89fe.jpg" width="169" height="300">|
+|<img src="https://user-images.githubusercontent.com/74184274/148947325-882c67ad-2be2-4d43-ae63-9912968d91d0.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947327-316625a3-722e-4f4a-a288-b7255a400f42.jpg" width="145" height="300">|<img src = "https://user-images.githubusercontent.com/74184274/148947330-d5ca4fff-60ee-4195-b107-9e230b44ea56.jpg" width="145" height="300">|
    - 해당 식당의 메뉴를 보여줍니다.
      - `jsoup`를 사용하여 카이스트 학식 안내 웹 페이지에서 메뉴 부분을 크롤링하여 텍스트 뷰로 보여줍니다. 메뉴 위쪽의 스피너를 통해 원하는 날짜를 선택하면, 해당 날짜의 학식 메뉴를 확인할 수 있습니다. 텍스트 뷰의 뒤에 블러 뷰를 배치하여 가독성을 높였습니다.
    - 종 스크롤을 통해 메뉴를 전부 확인 할 수 있습니다.
@@ -64,7 +64,7 @@
 ### 밥팟 참여
   |밥팟 조회|당겨서 새로고침|참가 팝업|
 |--|--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/148015534-bbdce00e-97cf-465a-b12d-9a4f1696fef7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148015535-b0aae00c-62f5-41d5-a782-e0ac29cbe6a7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148011164-2d5610b6-35ff-4d28-90e7-2ffe5bcf2859.jpg" width="169" height="300">| 
+|<img src="https://user-images.githubusercontent.com/74184274/148947332-ab84385a-a924-4f19-b5fd-4dcf43e2b163.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947334-aacb4f4c-fd7c-4104-b95e-d02507065230.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947342-eb1210c2-310b-4686-89b2-0d4fe7259bcd.jpg" width="145" height="300">| 
 - 밥 파티의 목록을 확인하세요.
   - `API server` 로부터 목록을 `json` 으로 받아와 `Party_Item`  `class`로 `ArrayList` 에 저장합니다.
   - `MyItemRecyclerViewAdapter` 를 통해 `RecyclerView` 에 `Party_Item` 을 적용합니다.
@@ -78,7 +78,7 @@
 
 |참가 성공|이미 참여한 경우|꽉 차있는 경우|
 |--|--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/148015534-bbdce00e-97cf-465a-b12d-9a4f1696fef7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148015535-b0aae00c-62f5-41d5-a782-e0ac29cbe6a7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148011164-2d5610b6-35ff-4d28-90e7-2ffe5bcf2859.jpg" width="169" height="300">| 
+|<img src="https://user-images.githubusercontent.com/74184274/148947344-d2d4e613-091a-40f3-b0fe-b9cfdf37f332.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947345-e727e277-3562-4265-820e-a0d4c36015f0.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947346-b560778d-8e6f-4b57-bf97-a6dbc6b27abd.jpg" width="145" height="300">| 
   
   - 참가에 성공할 경우 성공 메시지를 띄웁니다.
   - 이미 참여한 파티에 다시 참여할 경우 실패 메시지를 띄웁니다.
@@ -88,11 +88,11 @@
 ### 밥팟 생성
   |생성 화면|날짜 선택|시간 선택|
 |--|--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/148015534-bbdce00e-97cf-465a-b12d-9a4f1696fef7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148015535-b0aae00c-62f5-41d5-a782-e0ac29cbe6a7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148011164-2d5610b6-35ff-4d28-90e7-2ffe5bcf2859.jpg" width="169" height="300">|
+|<img src="https://user-images.githubusercontent.com/74184274/148947312-10afc0a3-8b2e-4395-b209-43c6fb1e3302.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947314-3df20795-8d0b-4ff6-9734-ba6ca628cd77.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947318-1e2387f5-4e03-4cb9-91a8-a560a8570e7b.jpg" width="145" height="300">|
   
-|카테고리 선택|인원 선택|1인 이하 선택시|
-|--|--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/148015534-bbdce00e-97cf-465a-b12d-9a4f1696fef7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148015535-b0aae00c-62f5-41d5-a782-e0ac29cbe6a7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148015535-b0aae00c-62f5-41d5-a782-e0ac29cbe6a7.jpg" width="169" height="300">|
+|카테고리 선택|1인 이하 선택시|
+|--|--|
+|<img src="https://user-images.githubusercontent.com/74184274/148947316-69f74362-1bea-4798-8098-53d6d3b56bf0.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947321-f3669fdd-524a-402e-bf9f-5319b84850a8.jpg" width="145" height="300">|
 
   - 카테고리를 눌러 기존에 있는 카테고리 중 선택하세요.
     - `Spinner` 를 이용해 설정한 카테고리 중 선택 하게 하였습니다.
@@ -115,25 +115,19 @@
 ## 마이 페이지
 > 본인의 정보와 파티를 관리하세요.
 ### 정보 확인
-  <img src = "https://user-images.githubusercontent.com/74184274/148010914-d404b7ce-ea9a-4edd-b6e2-18a01a7dce90.jpg" width="169" height="300">
-  
-  - 비오는 날의 풍경, 데리러 와준 고마운 사람과의 추억을 계절별로 정리하세요.
-       - `GridLayout`에 `CardView`를 적용해 `SubActivity`를 호출하여 앨범을 구현하였습니다.
+  <img src = "https://user-images.githubusercontent.com/74184274/148947340-f33daa24-7084-4a50-9130-0fbb7d15a241.jpg" width="145" height="300">
+
 
 ### 파티 관리
 |생성 파티 조회|생성 파티 삭제|당겨서 새로고침|
 |--|--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/148015534-bbdce00e-97cf-465a-b12d-9a4f1696fef7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148015535-b0aae00c-62f5-41d5-a782-e0ac29cbe6a7.jpg" width="169" height="300">|<img src = "https://user-images.githubusercontent.com/74184274/148015538-e097451b-3c09-47c5-a918-fd9685ed89fe.jpg" width="169" height="300">|
-   - 초기에는 아무 사진도 저장되어 있지 않습니다.
-   - 추억 남기기 버튼을 이용해 갤러리에서 사진을 가져오는 화면으로 넘어가세요.
-      -  `onClick()`에서 앨범으로 이동하여 `intent`를 가져옵니다.
+|<img src="https://user-images.githubusercontent.com/74184274/148947348-1bd2953c-cb31-40c9-81ea-d7e25d6ae7e5.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947354-083b7f60-7df2-4388-8bb9-cc8d3ea01ad1.jpg" width="145" height="300">|<img src = "https://user-images.githubusercontent.com/74184274/148947352-ae05e6c6-baf9-4756-9acb-fed58a438575.jpg" width="145" height="300">|
+
 
 |참가 파티 조회|참가 파티 탈퇴|당겨서 새로고침|
 |--|--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/148015534-bbdce00e-97cf-465a-b12d-9a4f1696fef7.jpg" width="169" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148015535-b0aae00c-62f5-41d5-a782-e0ac29cbe6a7.jpg" width="169" height="300">|<img src = "https://user-images.githubusercontent.com/74184274/148015538-e097451b-3c09-47c5-a918-fd9685ed89fe.jpg" width="169" height="300">|
-   - 초기에는 아무 사진도 저장되어 있지 않습니다.
-   - 추억 남기기 버튼을 이용해 갤러리에서 사진을 가져오는 화면으로 넘어가세요.
-      -  `onClick()`에서 앨범으로 이동하여 `intent`를 가져옵니다.
+|<img src="https://user-images.githubusercontent.com/74184274/148947361-dd0e44f6-7efd-430d-b3d4-9def4b63151d.jpg" width="145" height="300">|<img src="https://user-images.githubusercontent.com/74184274/148947365-97994bee-b2c1-4717-92d0-794f81a328ac.jpg" width="145" height="300">|<img src = "https://user-images.githubusercontent.com/74184274/148947364-3dbf8826-dc12-4c47-add2-780ceee605fd.jpg" width="145" height="300">|
+
 <br/>
 
 <br/>
