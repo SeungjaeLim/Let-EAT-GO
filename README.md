@@ -5,16 +5,15 @@
 <p>
   <img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=Android&logoColor=white"/>
   <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=Java&logoColor=white"/>
+ </p>
+ <p>
   <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white"/>
   <img src="https://img.shields.io/badge/MySQL-000000?style=flat-square&logo=MySQL&logoColor=white"/>
+  <img src="https://img.shields.io/badge/express-000000?style=flat-square&logo=express&logoColor=white">
 
 </p>
 
-<br/>
 <img src="https://user-images.githubusercontent.com/74184274/148947164-7913af20-7262-4429-9bb8-2ccce84f7ea0.png" width="150" height="150">
-<br/>
-
-<br/>
 
 |학식 메뉴 확인|밥팟 탐색|마이페이지|
 |--|--|--|
