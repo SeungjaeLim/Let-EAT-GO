@@ -17,7 +17,7 @@
 
 |학식 메뉴 확인|밥팟 탐색|마이페이지|
 |--|--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/148947325-882c67ad-2be2-4d43-ae63-9912968d91d0.jpg" width="210" height="400">|<img src = "https://user-images.githubusercontent.com/74184274/148947332-ab84385a-a924-4f19-b5fd-4dcf43e2b163.jpg" width = "210" height = "400">|<img src = "https://user-images.githubusercontent.com/74184274/148947340-f33daa24-7084-4a50-9130-0fbb7d15a241.jpg" width = "210" height = "400">| 
+|<img src="https://user-images.githubusercontent.com/74184274/148947325-882c67ad-2be2-4d43-ae63-9912968d91d0.jpg" width="200" height="400">|<img src = "https://user-images.githubusercontent.com/74184274/148947332-ab84385a-a924-4f19-b5fd-4dcf43e2b163.jpg" width = "200" height = "400">|<img src = "https://user-images.githubusercontent.com/74184274/148947340-f33daa24-7084-4a50-9130-0fbb7d15a241.jpg" width = "200" height = "400">| 
 
 <br/>
 
