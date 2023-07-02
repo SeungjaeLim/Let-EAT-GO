@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MenuCrawling"
+    tools:visibility="visible">
+
+
+    <TextView
+        android:id="@+id/Hitext"
+        android:layout_width="0dp"
+        android:layout_height="141dp"
+        android:background="@drawable/background_tab1_textview"
+        android:gravity="center_vertical"
+        android:padding="25dp"
+        android:shadowColor="#AE8686"
+        android:shadowDx="7"
+        android:shadowDy="5"
+        android:shadowRadius="20"
+        android:text="굳모닝"
+        android:textColor="#FFF8F8"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_kama"
+        style="@style/Widget.AppCompat.Button"
+
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/gradient_button"
+        android:elevation="30dp"
+        android:fontFamily="@font/notosanskrthin"
+        android:padding="10dp"
+        android:shadowColor="#E3CDCD"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="10"
+        android:text="카이마루"
+        android:textColor="#575757"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Hitext"
+        tools:ignore="MissingConstraints" />
+
+
+    <Button
+        android:id="@+id/button_west"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/gradient_button"
+        android:backgroundTint="#FFFFFF"
+        android:backgroundTintMode="multiply"
+        android:elevation="100dp"
+        android:fontFamily="@font/notosanskrthin"
+        android:shadowColor="#D1BDBD"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="서맛골"
+        android:textColor="#575757"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_kama"
+        app:rippleColor="#00FFFFFF"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_east"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/gradient_button"
+        android:backgroundTint="#FFFFFF"
+        android:backgroundTintMode="multiply"
+        android:elevation="10dp"
+        android:fontFamily="@font/notosanskrthin"
+        android:text="동맛골"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_west"
+        tools:ignore="MissingConstraints" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

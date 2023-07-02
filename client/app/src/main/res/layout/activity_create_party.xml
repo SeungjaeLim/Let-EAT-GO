@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".CreatePartyActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="40dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="30dp">
+
+        <TextView
+            android:id="@+id/textView_category"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="카테고리"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="264dp"
+            android:layout_height="63dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="#54FFFFFF"
+            android:elevation="20dp"
+            android:popupElevation="5dp" />
+
+        <TextView
+            android:id="@+id/textView_placename"
+            android:layout_width="110dp"
+            android:layout_height="41dp"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="장소"
+            android:textSize="20sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="299dp"
+            android:layout_height="57dp"
+            android:layout_gravity="center">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="장소를 입력하세요" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="인원 "
+            android:textSize="20sp" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="300dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:max="4"
+            android:progress="2"
+            android:progressBackgroundTint="#AF8181"
+            android:progressTint="#FFA8A8"
+            android:theme="@style/Theme.Mealparty.NoActionBar"
+            android:tickMarkTint="#CD6E6E" />
+
+        <TextView
+            android:id="@+id/textView_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="일시"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView_DatePick"
+            android:layout_width="259dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/gradient_button4"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="터치해서 날짜 선택" />
+
+        <TextView
+            android:id="@+id/textView_TimePick"
+            android:layout_width="256dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:background="@drawable/gradient_button4"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="터치해서 시간 선택" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_cancel"
+                android:layout_width="98dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="156dp"
+                android:background="@drawable/gradient_button3"
+                android:text="취소" />
+
+            <Button
+                android:id="@+id/button_complete"
+                android:layout_width="98dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="156dp"
+                android:background="@drawable/gradient_button3"
+                android:text="생성" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
